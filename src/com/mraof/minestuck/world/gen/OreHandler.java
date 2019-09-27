@@ -37,13 +37,13 @@ public class OreHandler implements IWorldGenerator
 	{
 		if(world.getDimension().isSurfaceWorld() && (generateCruxiteOre.get() || chunkGenerator instanceof LandChunkGenerator) && !disableCruxite)
 		{
-			this.addOreSpawn(STONE_CRUXITE_ORE.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 16, 16,
+			this.addOreSpawn(STONE_CRUXITE_ORE.get().getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 16, 16,
 					baseCruxiteVeinSize + random.nextInt(bonusCruxiteVeinSize), cruxiteVeinsPerChunk, cruxiteStratumMin, cruxiteStratumMax);
 		}
 		
 		if(world.getDimension().isSurfaceWorld() && (generateUraniumOre.get() || chunkGenerator instanceof LandChunkGenerator) && !disableUranium)
 		{
-			this.addOreSpawn(STONE_URANIUM_ORE.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 16, 16,
+			this.addOreSpawn(STONE_URANIUM_ORE.get().getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 16, 16,
 					baseUraniumVeinSize + random.nextInt(bonusUraniumVeinSize), uraniumVeinsPerChunk, uraniumStratumMin, uraniumStratumMax);
 		}
 	}
@@ -55,9 +55,9 @@ public class OreHandler implements IWorldGenerator
 		BlockState groundType = Blocks.STONE.getDefaultState();
 		if(world.getDimension() instanceof LandDimension)
 			groundType = world.getChunkProvider().getChunkGenerator().getSettings().getDefaultBlock();
-		if(block.getBlock() == STONE_CRUXITE_ORE)
+		if(block.getBlock() == STONE_CRUXITE_ORE.get())
 			block = CustomOreBlock.getCruxiteState(groundType);
-		if(block.getBlock() == STONE_URANIUM_ORE)
+		if(block.getBlock() == STONE_URANIUM_ORE.get())
 			block = CustomOreBlock.getUraniumState(groundType);
 		for(int x = 0; x < chancesToSpawn; x++)
 		{

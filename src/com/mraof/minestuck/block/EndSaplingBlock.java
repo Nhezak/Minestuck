@@ -2,6 +2,7 @@ package com.mraof.minestuck.block;
 
 import java.util.Random;
 
+import com.mraof.minestuck.util.MSTags;
 import com.mraof.minestuck.world.gen.feature.EndTree;
 import net.minecraft.block.*;
 import net.minecraft.block.trees.Tree;
@@ -28,7 +29,7 @@ public class EndSaplingBlock extends BushBlock implements IGrowable
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext contezt)
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
 		return SHAPE;
 	}
@@ -94,7 +95,7 @@ public class EndSaplingBlock extends BushBlock implements IGrowable
 	@Override
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
-		return state.getBlock() == Blocks.END_STONE || state.getBlock() == MSBlocks.COARSE_END_STONE || state.getBlock() == MSBlocks.END_GRASS;
+		return MSTags.Blocks.END_SAPLING_DIRT.contains(state.getBlock());
 	}
 	
 	@Override

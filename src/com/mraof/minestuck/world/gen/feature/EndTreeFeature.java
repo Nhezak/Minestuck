@@ -20,8 +20,8 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class EndTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 {
-	private static final BlockState LOG = MSBlocks.END_LOG.getDefaultState();
-	private static final BlockState LEAF = MSBlocks.END_LEAVES.getDefaultState();
+	private final BlockState LOG = MSBlocks.END_LOG.get().getDefaultState();
+	private final BlockState LEAF = MSBlocks.END_LEAVES.get().getDefaultState();
 	
 	private final int minMax = 5, maxMax = 5;
 	
@@ -157,7 +157,7 @@ public class EndTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 		{
 			if(distance <= EndLeavesBlock.LEAF_SUSTAIN_DISTANCE)
 			{
-				setLogState(changedBlocks, world, curr, MSBlocks.END_LEAVES.getDefaultState().with(EndLeavesBlock.DISTANCE, distance), boundsIn);
+				setLogState(changedBlocks, world, curr, MSBlocks.END_LEAVES.get().getDefaultState().with(EndLeavesBlock.DISTANCE, distance), boundsIn);
 				leaves(changedBlocks, world, curr.south(), boundsIn, distance + 1);
 				leaves(changedBlocks, world, curr.north(), boundsIn, distance + 1);
 				leaves(changedBlocks, world, curr.up(), boundsIn, distance + 1);

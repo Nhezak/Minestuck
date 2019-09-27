@@ -18,8 +18,8 @@ import java.util.function.Function;
 
 public class RainbowTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 {
-	private static final BlockState LOG = MSBlocks.RAINBOW_LOG.getDefaultState();
-	private static final BlockState LEAF = MSBlocks.RAINBOW_LEAVES.getDefaultState();
+	private final BlockState LOG = MSBlocks.RAINBOW_LOG.get().getDefaultState();
+	private final BlockState LEAF = MSBlocks.RAINBOW_LEAVES.get().getDefaultState();
 	
 	public RainbowTreeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory, boolean doBlockNotify)
 	{

@@ -33,24 +33,24 @@ public class MSTileEntityTypes
 	@SubscribeEvent
 	public static void registerTileEntityType(final RegistryEvent.Register<TileEntityType<?>> event)
 	{
-		event.getRegistry().register((COMPUTER = TileEntityType.Builder.create(ComputerTileEntity::new, MSBlocks.COMPUTER_ON, MSBlocks.CROCKERTOP_ON, MSBlocks.HUBTOP_ON, MSBlocks.LAPTOP_ON, MSBlocks.LUNCHTOP_ON).build(null)).setRegistryName("computer"));
-		event.getRegistry().register((MINI_CRUXTRUDER = TileEntityType.Builder.create(MiniCruxtruderTileEntity::new, MSBlocks.MINI_CRUXTRUDER).build(null)).setRegistryName("mini_cruxtruder"));
-		event.getRegistry().register((MINI_TOTEM_LATHE = TileEntityType.Builder.create(MiniTotemLatheTileEntity::new, MSBlocks.MINI_TOTEM_LATHE).build(null)).setRegistryName("mini_totem_lathe"));
-		event.getRegistry().register((MINI_ALCHEMITER = TileEntityType.Builder.create(MiniAlchemiterTileEntity::new, MSBlocks.MINI_ALCHEMITER).build(null)).setRegistryName("mini_alchemiter"));
-		event.getRegistry().register((MINI_PUNCH_DESIGNIX = TileEntityType.Builder.create(MiniPunchDesignixTileEntity::new, MSBlocks.MINI_PUNCH_DESIGNIX).build(null)).setRegistryName("mini_punch_designix"));
-		event.getRegistry().register((CRUXTRUDER = TileEntityType.Builder.create(CruxtruderTileEntity::new, MSBlocks.CRUXTRUDER.CENTER).build(null)).setRegistryName("cruxtruder"));
-		event.getRegistry().register((TOTEM_LATHE = TileEntityType.Builder.create(TotemLatheTileEntity::new, MSBlocks.TOTEM_LATHE.CARD_SLOT).build(null)).setRegistryName("totem_lathe"));
-		event.getRegistry().register((ALCHEMITER = TileEntityType.Builder.create(AlchemiterTileEntity::new, MSBlocks.ALCHEMITER.TOTEM_PAD).build(null)).setRegistryName("alchemiter"));
-		event.getRegistry().register((PUNCH_DESIGNIX = TileEntityType.Builder.create(PunchDesignixTileEntity::new, MSBlocks.PUNCH_DESIGNIX.SLOT).build(null)).setRegistryName("punch_designix"));
-		event.getRegistry().register((GRIST_WIDGET = TileEntityType.Builder.create(GristWidgetTileEntity::new, MSBlocks.GRIST_WIDGET).build(null)).setRegistryName("grist_widget"));
-		event.getRegistry().register((TRANSPORTALIZER = TileEntityType.Builder.create(TransportalizerTileEntity::new, MSBlocks.TRANSPORTALIZER).build(null)).setRegistryName("transportalizer"));
-		event.getRegistry().register((ITEM_STACK = TileEntityType.Builder.create(ItemStackTileEntity::new, MSBlocks.CRUXITE_DOWEL, MSBlocks.TOTEM_LATHE.DOWEL_ROD).build(null)).setRegistryName("item_stack"));
-		event.getRegistry().register((URANIUM_COOKER = TileEntityType.Builder.create(UraniumCookerTileEntity::new, MSBlocks.URANIUM_COOKER).build(null)).setRegistryName("uranium_cooker"));
+		event.getRegistry().register((COMPUTER = TileEntityType.Builder.create(ComputerTileEntity::new, MSBlocks.COMPUTER_ON.get(), MSBlocks.CROCKERTOP_ON.get(), MSBlocks.HUBTOP_ON.get(), MSBlocks.LAPTOP_ON.get(), MSBlocks.LUNCHTOP_ON.get()).build(null)).setRegistryName("computer"));
+		event.getRegistry().register((MINI_CRUXTRUDER = TileEntityType.Builder.create(MiniCruxtruderTileEntity::new, MSBlocks.MINI_CRUXTRUDER.get()).build(null)).setRegistryName("mini_cruxtruder"));
+		event.getRegistry().register((MINI_TOTEM_LATHE = TileEntityType.Builder.create(MiniTotemLatheTileEntity::new, MSBlocks.MINI_TOTEM_LATHE.get()).build(null)).setRegistryName("mini_totem_lathe"));
+		event.getRegistry().register((MINI_ALCHEMITER = TileEntityType.Builder.create(MiniAlchemiterTileEntity::new, MSBlocks.MINI_ALCHEMITER.get()).build(null)).setRegistryName("mini_alchemiter"));
+		event.getRegistry().register((MINI_PUNCH_DESIGNIX = TileEntityType.Builder.create(MiniPunchDesignixTileEntity::new, MSBlocks.MINI_PUNCH_DESIGNIX.get()).build(null)).setRegistryName("mini_punch_designix"));
+		event.getRegistry().register((CRUXTRUDER = TileEntityType.Builder.create(CruxtruderTileEntity::new, MSBlocks.CRUXTRUDER.CENTER.get()).build(null)).setRegistryName("cruxtruder"));
+		event.getRegistry().register((TOTEM_LATHE = TileEntityType.Builder.create(TotemLatheTileEntity::new, MSBlocks.TOTEM_LATHE.CARD_SLOT.get()).build(null)).setRegistryName("totem_lathe"));
+		event.getRegistry().register((ALCHEMITER = TileEntityType.Builder.create(AlchemiterTileEntity::new, MSBlocks.ALCHEMITER.TOTEM_PAD.get()).build(null)).setRegistryName("alchemiter"));
+		event.getRegistry().register((PUNCH_DESIGNIX = TileEntityType.Builder.create(PunchDesignixTileEntity::new, MSBlocks.PUNCH_DESIGNIX.SLOT.get()).build(null)).setRegistryName("punch_designix"));
+		event.getRegistry().register((GRIST_WIDGET = TileEntityType.Builder.create(GristWidgetTileEntity::new, MSBlocks.GRIST_WIDGET.get()).build(null)).setRegistryName("grist_widget"));
+		event.getRegistry().register((TRANSPORTALIZER = TileEntityType.Builder.create(TransportalizerTileEntity::new, MSBlocks.TRANSPORTALIZER.get()).build(null)).setRegistryName("transportalizer"));
+		event.getRegistry().register((ITEM_STACK = TileEntityType.Builder.create(ItemStackTileEntity::new, MSBlocks.CRUXITE_DOWEL.get(), MSBlocks.TOTEM_LATHE.DOWEL_ROD.get()).build(null)).setRegistryName("item_stack"));
+		event.getRegistry().register((URANIUM_COOKER = TileEntityType.Builder.create(UraniumCookerTileEntity::new, MSBlocks.URANIUM_COOKER.get()).build(null)).setRegistryName("uranium_cooker"));
 		//event.getRegistry().register((JUMPER_BLOCK = TileEntityType.Builder.create(TileEntityJumperBlock::new).build(null)).setRegistryName("jumper_block"));
 		//event.getRegistry().register((ALCHEMITER_UPGRADE = TileEntityType.Builder.create(TileEntityAlchemiterUpgrade::new).build(null)).setRegistryName("alchemiter_upgrade"));
 		//event.getRegistry().register((UPGRADE_ALCHEMITER = TileEntityType.Builder.create(TileEntityUpgradedAlchemiter::new).build(null)).setRegistryName("upgrade_alchemiter"));
 		//event.getRegistry().register((HOLOPAD = TileEntityType.Builder.create(HolopadTileEntity::new, MinestuckBlocks.HOLOPAD).build(null)).setRegistryName("holopad"));
-		event.getRegistry().register((SKAIA_PORTAL = TileEntityType.Builder.create(SkaiaPortalTileEntity::new, MSBlocks.SKAIA_PORTAL).build(null)).setRegistryName("skaia_portal"));
-		event.getRegistry().register((GATE = TileEntityType.Builder.create(GateTileEntity::new, MSBlocks.GATE, MSBlocks.RETURN_NODE).build(null)).setRegistryName("gate"));
+		event.getRegistry().register((SKAIA_PORTAL = TileEntityType.Builder.create(SkaiaPortalTileEntity::new, MSBlocks.SKAIA_PORTAL.get()).build(null)).setRegistryName("skaia_portal"));
+		event.getRegistry().register((GATE = TileEntityType.Builder.create(GateTileEntity::new, MSBlocks.GATE.get(), MSBlocks.RETURN_NODE.get()).build(null)).setRegistryName("gate"));
 	}
 }

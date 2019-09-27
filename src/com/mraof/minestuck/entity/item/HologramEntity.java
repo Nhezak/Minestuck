@@ -37,7 +37,7 @@ public class HologramEntity extends Entity
 
 	public HologramEntity(EntityType<? extends HologramEntity> type, World worldIn)
 	{
-		this(type, worldIn, new ItemStack(MSBlocks.GENERIC_OBJECT));
+		this(type, worldIn, new ItemStack(MSBlocks.GENERIC_OBJECT.get()));
 	}
 	
 	public void onUpdate()
@@ -61,7 +61,7 @@ public class HologramEntity extends Entity
 	@Override
 	protected void registerData()
 	{
-		this.dataManager.register(ITEM, new ItemStack(MSBlocks.GENERIC_OBJECT));
+		this.dataManager.register(ITEM, new ItemStack(MSBlocks.GENERIC_OBJECT.get()));
 	}
 	
 	@Override

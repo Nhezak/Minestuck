@@ -452,11 +452,11 @@ public abstract class CruxiteArtifactItem extends Item
 		for(int i = 0; i < 9; i++)
 			if(i == 4)
 			{
-				world.setBlockState(pos, MSBlocks.GATE.getDefaultState().cycle(GateBlock.MAIN), 0);
+				world.setBlockState(pos, MSBlocks.GATE.get().getDefaultState().cycle(GateBlock.MAIN), 0);
 				GateTileEntity tileEntity = (GateTileEntity) world.getTileEntity(pos);
 				tileEntity.gateCount = gateCount;
 			}
-			else world.setBlockState(pos.add((i % 3) - 1, 0, i/3 - 1), MSBlocks.GATE.getDefaultState(), 0);
+			else world.setBlockState(pos.add((i % 3) - 1, 0, i/3 - 1), MSBlocks.GATE.get().getDefaultState(), 0);
 	}
 	
 	private class BlockMove

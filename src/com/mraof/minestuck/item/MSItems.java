@@ -22,6 +22,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import static com.mraof.minestuck.block.MSBlocks.*;
 
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * This class contains all non-ItemBlock items that minestuck adds,
@@ -356,11 +358,11 @@ public class MSItems
 		
 		registerItemBlock(registry, LAYERED_SAND, MSItemGroup.LANDS);
 		registerItemBlock(registry, LAYERED_RED_SAND, MSItemGroup.LANDS);
-		registerItemBlock(registry, GLOWY_GOOP, MSItemGroup.LANDS);
+		registerItemBlock(registry, GLOWING_GOOP, MSItemGroup.LANDS);
 		registerItemBlock(registry, COAGULATED_BLOOD, MSItemGroup.LANDS);
 		registerItemBlock(registry, VEIN, MSItemGroup.LANDS);
 		registerItemBlock(registry, VEIN_CORNER, MSItemGroup.LANDS);
-		registerItemBlock(registry, VEIN_CORNER_INVERTED, MSItemGroup.LANDS);
+		registerItemBlock(registry, INVERTED_VEIN_CORNER, MSItemGroup.LANDS);
 		
 		registerItemBlock(registry, COARSE_STONE_STAIRS, MSItemGroup.LANDS);
 		registerItemBlock(registry, SHADE_BRICK_STAIRS, MSItemGroup.LANDS);
@@ -387,7 +389,7 @@ public class MSItems
 		registry.register(new TotemLatheItem(TOTEM_LATHE.getMainBlock(), new Item.Properties().group(MSItemGroup.MAIN)).setRegistryName("totem_lathe"));
 		registry.register(new AlchemiterItem(ALCHEMITER.getMainBlock(), new Item.Properties().group(MSItemGroup.MAIN)).setRegistryName("alchemiter"));
 		registry.register(new PunchDesignixItem(PUNCH_DESIGNIX.getMainBlock(), new Item.Properties().group(MSItemGroup.MAIN)).setRegistryName("punch_designix"));
-		registerItemBlock(registry, new MiniCruxtruderItem(MINI_CRUXTRUDER, new Item.Properties().group(MSItemGroup.MAIN)));
+		registerItemBlock(registry, new MiniCruxtruderItem(MINI_CRUXTRUDER.get(), new Item.Properties().group(MSItemGroup.MAIN)));
 		registerItemBlock(registry, MINI_TOTEM_LATHE, MSItemGroup.MAIN);
 		registerItemBlock(registry, MINI_ALCHEMITER, MSItemGroup.MAIN);
 		registerItemBlock(registry, MINI_PUNCH_DESIGNIX, MSItemGroup.MAIN);
@@ -399,22 +401,22 @@ public class MSItems
 		registerItemBlock(registry, CROCKERTOP_OFF, MSItemGroup.MAIN);
 		registerItemBlock(registry, HUBTOP_OFF, MSItemGroup.MAIN);
 		registerItemBlock(registry, LUNCHTOP_OFF, MSItemGroup.MAIN);
-		registerItemBlock(registry, new TransportalizerItem(TRANSPORTALIZER, new Item.Properties().group(MSItemGroup.MAIN)));
+		registerItemBlock(registry, new TransportalizerItem(TRANSPORTALIZER.get(), new Item.Properties().group(MSItemGroup.MAIN)));
 		registerItemBlock(registry, GRIST_WIDGET, MSItemGroup.MAIN);
 		registerItemBlock(registry, URANIUM_COOKER, MSItemGroup.MAIN);
 		
-		registerItemBlock(registry, new DowelItem(CRUXITE_DOWEL, new Item.Properties().group(MSItemGroup.MAIN)));
+		registerItemBlock(registry, new DowelItem(CRUXITE_DOWEL.get(), new Item.Properties().group(MSItemGroup.MAIN)));
 		
 		registerItemBlock(registry, GOLD_SEEDS, MSItemGroup.MAIN);
 		registerItemBlock(registry, WOODEN_CACTUS, MSItemGroup.MAIN);
 		
-		registerItemBlock(registry, new BlockItem(APPLE_CAKE, new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
-		registerItemBlock(registry, new BlockItem(BLUE_CAKE, new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
-		registerItemBlock(registry, new BlockItem(COLD_CAKE, new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
-		registerItemBlock(registry, new BlockItem(RED_CAKE, new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
-		registerItemBlock(registry, new BlockItem(HOT_CAKE, new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
-		registerItemBlock(registry, new BlockItem(REVERSE_CAKE, new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
-		registerItemBlock(registry, new BlockItem(FUCHSIA_CAKE, new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
+		registerItemBlock(registry, new BlockItem(APPLE_CAKE.get(), new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
+		registerItemBlock(registry, new BlockItem(BLUE_CAKE.get(), new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
+		registerItemBlock(registry, new BlockItem(COLD_CAKE.get(), new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
+		registerItemBlock(registry, new BlockItem(RED_CAKE.get(), new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
+		registerItemBlock(registry, new BlockItem(HOT_CAKE.get(), new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
+		registerItemBlock(registry, new BlockItem(REVERSE_CAKE.get(), new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
+		registerItemBlock(registry, new BlockItem(FUCHSIA_CAKE.get(), new Item.Properties().group(MSItemGroup.MAIN).maxStackSize(1)));
 		
 		registerItemBlock(registry, PRIMED_TNT, MSItemGroup.MAIN);
 		registerItemBlock(registry, UNSTABLE_TNT, MSItemGroup.MAIN);
@@ -563,7 +565,7 @@ public class MSItems
 		registry.register(SPOREO = new Item(new Item.Properties().group(MSItemGroup.LANDS).food(MSFoods.SPOREO)).setRegistryName("sporeo"));
 		registry.register(MOREL_MUSHROOM = new Item(new Item.Properties().group(MSItemGroup.LANDS).food(MSFoods.MOREL_MUSHROOM)).setRegistryName("morel_mushroom"));
 		registry.register(FRENCH_FRY = new Item(new Item.Properties().group(MSItemGroup.LANDS).food(MSFoods.FRENCH_FRY)).setRegistryName("french_fry"));
-		registry.register(STRAWBERRY_CHUNK = new BlockNamedItem(STRAWBERRY_STEM, new Item.Properties().group(MSItemGroup.LANDS).food(MSFoods.STRAWBERRY_CHUNK)).setRegistryName("strawberry_chunk"));
+		registry.register(STRAWBERRY_CHUNK = new BlockNamedItem(STRAWBERRY_STEM.get(), new Item.Properties().group(MSItemGroup.LANDS).food(MSFoods.STRAWBERRY_CHUNK)).setRegistryName("strawberry_chunk"));
 		
 		registry.register(CANDY_CORN = new Item(new Item.Properties().group(MSItemGroup.MAIN).food(MSFoods.CANDY_CORN)).setRegistryName("candy_corn"));
 		registry.register(BUILD_GUSHERS = new Item(new Item.Properties().group(MSItemGroup.MAIN).food(MSFoods.BUILD_GUSHERS)).setRegistryName("build_gushers"));
@@ -648,8 +650,9 @@ public class MSItems
 		return registerItemBlock(registry, new BlockItem(block, new Item.Properties()));
 	}
 	
-	private static Item registerItemBlock(IForgeRegistry<Item> registry, Block block, ItemGroup group)
+	private static Item registerItemBlock(IForgeRegistry<Item> registry, Supplier<? extends Block> blockSupplier, ItemGroup group)
 	{
+		Block block = Objects.requireNonNull(blockSupplier.get());
 		return registerItemBlock(registry, new BlockItem(block, new Item.Properties().group(group)));
 	}
 	

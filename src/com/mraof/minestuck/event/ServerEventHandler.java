@@ -12,6 +12,7 @@ import com.mraof.minestuck.network.skaianet.SkaianetHandler;
 import com.mraof.minestuck.util.*;
 
 import com.mraof.minestuck.world.storage.PlayerSavedData;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -169,7 +170,7 @@ public class ServerEventHandler
 	@SubscribeEvent
 	public void onPlayerUseHoe(UseHoeEvent event)
 	{
-		if(event.getContext().getWorld().getBlockState(event.getContext().getPos()).getBlock() == MSBlocks.COARSE_END_STONE)
+		if(event.getContext().getWorld().getBlockState(event.getContext().getPos()).getBlock() == MSBlocks.COARSE_END_STONE.get())
 		{
 			event.getContext().getWorld().setBlockState(event.getContext().getPos(), Blocks.END_STONE.getDefaultState());
 			event.getContext().getWorld().playSound(null, event.getContext().getPos(), SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 	1.0F);
@@ -180,7 +181,7 @@ public class ServerEventHandler
 	@SubscribeEvent
 	public void onGetItemBurnTime(FurnaceFuelBurnTimeEvent event)
 	{
-		if(event.getItemStack().getItem() == MSBlocks.TREATED_PLANKS.asItem())
+		if(event.getItemStack().getItem() == MSBlocks.TREATED_PLANKS.map(Block::asItem).orElse(null))
 			event.setBurnTime(50);	//Do not set this number to 0.
 	}
 	

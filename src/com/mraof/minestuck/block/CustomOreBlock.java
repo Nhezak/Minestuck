@@ -1,9 +1,11 @@
 package com.mraof.minestuck.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.Random;
 
@@ -31,39 +33,45 @@ public class CustomOreBlock extends OreBlock
 	
 	public static BlockState getCruxiteState(BlockState ground)
 	{
-		if(ground.getBlock() == Blocks.STONE)
-			return MSBlocks.STONE_CRUXITE_ORE.getDefaultState();
-		else if(ground.getBlock() == Blocks.NETHERRACK)
-			return MSBlocks.NETHERRACK_CRUXITE_ORE.getDefaultState();
+		RegistryObject<Block> block;
+		if(ground.getBlock() == Blocks.STONE)	//TODO Change this to something more dynamic
+			block = MSBlocks.STONE_CRUXITE_ORE;
 		else if(ground.getBlock() == Blocks.COBBLESTONE)
-			return MSBlocks.COBBLESTONE_CRUXITE_ORE.getDefaultState();
+			block = MSBlocks.COBBLESTONE_CRUXITE_ORE;
 		else if(ground.getBlock() == Blocks.SANDSTONE)
-			return MSBlocks.SANDSTONE_CRUXITE_ORE.getDefaultState();
+			block = MSBlocks.SANDSTONE_CRUXITE_ORE;
 		else if(ground.getBlock() == Blocks.RED_SANDSTONE)
-			return MSBlocks.RED_SANDSTONE_CRUXITE_ORE.getDefaultState();
+			block = MSBlocks.RED_SANDSTONE_CRUXITE_ORE;
+		else if(ground.getBlock() == Blocks.NETHERRACK)
+			block = MSBlocks.NETHERRACK_CRUXITE_ORE;
 		else if(ground.getBlock() == Blocks.END_STONE)
-			return MSBlocks.END_STONE_CRUXITE_ORE.getDefaultState();
-		else if(ground.getBlock() == MSBlocks.PINK_STONE)
-			return MSBlocks.PINK_STONE_CRUXITE_ORE.getDefaultState();
-		return MSBlocks.STONE_CRUXITE_ORE.getDefaultState();
+			block = MSBlocks.END_STONE_CRUXITE_ORE;
+		else if(ground.getBlock() == MSBlocks.PINK_STONE.get())
+			block = MSBlocks.PINK_STONE_CRUXITE_ORE;
+		else block = MSBlocks.STONE_CRUXITE_ORE;
+		
+		return block.orElseThrow(() -> new IllegalStateException("Cruxite ore for "+ground.getBlock()+" has not been created yet!")).getDefaultState();
 	}
 	
 	public static BlockState getUraniumState(BlockState ground)
 	{
-		if(ground.getBlock() == Blocks.STONE)
-			return MSBlocks.STONE_URANIUM_ORE.getDefaultState();
-		else if(ground.getBlock() == Blocks.NETHERRACK)
-			return MSBlocks.NETHERRACK_URANIUM_ORE.getDefaultState();
+		RegistryObject<Block> block;
+		if(ground.getBlock() == Blocks.STONE)	//TODO Change this to something more dynamic
+			block = MSBlocks.STONE_URANIUM_ORE;
 		else if(ground.getBlock() == Blocks.COBBLESTONE)
-			return MSBlocks.COBBLESTONE_URANIUM_ORE.getDefaultState();
+			block = MSBlocks.COBBLESTONE_URANIUM_ORE;
 		else if(ground.getBlock() == Blocks.SANDSTONE)
-			return MSBlocks.SANDSTONE_URANIUM_ORE.getDefaultState();
+			block = MSBlocks.SANDSTONE_URANIUM_ORE;
 		else if(ground.getBlock() == Blocks.RED_SANDSTONE)
-			return MSBlocks.RED_SANDSTONE_URANIUM_ORE.getDefaultState();
+			block = MSBlocks.RED_SANDSTONE_URANIUM_ORE;
+		else if(ground.getBlock() == Blocks.NETHERRACK)
+			block = MSBlocks.NETHERRACK_URANIUM_ORE;
 		else if(ground.getBlock() == Blocks.END_STONE)
-			return MSBlocks.END_STONE_URANIUM_ORE.getDefaultState();
-		else if(ground.getBlock() == MSBlocks.PINK_STONE)
-			return MSBlocks.PINK_STONE_URANIUM_ORE.getDefaultState();
-		return MSBlocks.STONE_URANIUM_ORE.getDefaultState();
+			block = MSBlocks.END_STONE_URANIUM_ORE;
+		else if(ground.getBlock() == MSBlocks.PINK_STONE.get())
+			block = MSBlocks.PINK_STONE_URANIUM_ORE;
+		else block = MSBlocks.STONE_URANIUM_ORE;
+		
+		return block.orElseThrow(() -> new IllegalStateException("Uranium ore for "+ground.getBlock()+" has not been created yet!")).getDefaultState();
 	}
 }

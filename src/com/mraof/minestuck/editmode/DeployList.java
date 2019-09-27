@@ -175,9 +175,9 @@ public class DeployList
 			{
 				registerItem("portable_cruxtruder", new GristSet(GristType.BUILD, 200), 1, null,
 						(connection, world) -> MiniCruxtruderItem.getCruxtruderWithColor(PlayerSavedData.get(world.getServer()).getData(connection.getClientIdentifier()).color));
-				registerItem("portable_punch_designix", new ItemStack(MSBlocks.MINI_PUNCH_DESIGNIX), new GristSet(GristType.BUILD, 200), 1);
-				registerItem("portable_totem_lathe", new ItemStack(MSBlocks.MINI_TOTEM_LATHE), new GristSet(GristType.BUILD, 200), 1);
-				registerItem("portable_alchemiter", new ItemStack(MSBlocks.MINI_ALCHEMITER), new GristSet(GristType.BUILD, 300), 1);
+				registerItem("portable_punch_designix", new ItemStack(MSBlocks.MINI_PUNCH_DESIGNIX.get()), new GristSet(GristType.BUILD, 200), 1);
+				registerItem("portable_totem_lathe", new ItemStack(MSBlocks.MINI_TOTEM_LATHE.get()), new GristSet(GristType.BUILD, 200), 1);
+				registerItem("portable_alchemiter", new ItemStack(MSBlocks.MINI_ALCHEMITER.get()), new GristSet(GristType.BUILD, 300), 1);
 			} else
 			{
 				removeEntry("portable_cruxtruder");

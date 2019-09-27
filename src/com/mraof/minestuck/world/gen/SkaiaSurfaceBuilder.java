@@ -20,10 +20,10 @@ import java.util.function.Function;
 @Mod.EventBusSubscriber(modid = Minestuck.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 public class SkaiaSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 {
-	public final SurfaceBuilderConfig WHITE_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.WHITE_CHESS_DIRT.getDefaultState(), MSBlocks.WHITE_CHESS_DIRT.getDefaultState(), MSBlocks.WHITE_CHESS_DIRT.getDefaultState());
-	public final SurfaceBuilderConfig LIGHT_GRAY_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.LIGHT_GRAY_CHESS_DIRT.getDefaultState(), MSBlocks.LIGHT_GRAY_CHESS_DIRT.getDefaultState(), MSBlocks.LIGHT_GRAY_CHESS_DIRT.getDefaultState());
-	public final SurfaceBuilderConfig DARK_GRAY_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.DARK_GRAY_CHESS_DIRT.getDefaultState(), MSBlocks.DARK_GRAY_CHESS_DIRT.getDefaultState(), MSBlocks.DARK_GRAY_CHESS_DIRT.getDefaultState());
-	public final SurfaceBuilderConfig BLACK_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.BLACK_CHESS_DIRT.getDefaultState(), MSBlocks.BLACK_CHESS_DIRT.getDefaultState(), MSBlocks.BLACK_CHESS_DIRT.getDefaultState());
+	public final SurfaceBuilderConfig WHITE_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.WHITE_CHESS_DIRT.get().getDefaultState(), MSBlocks.WHITE_CHESS_DIRT.get().getDefaultState(), MSBlocks.WHITE_CHESS_DIRT.get().getDefaultState());
+	public final SurfaceBuilderConfig LIGHT_GRAY_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.LIGHT_GRAY_CHESS_DIRT.get().getDefaultState(), MSBlocks.LIGHT_GRAY_CHESS_DIRT.get().getDefaultState(), MSBlocks.LIGHT_GRAY_CHESS_DIRT.get().getDefaultState());
+	public final SurfaceBuilderConfig DARK_GRAY_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.DARK_GRAY_CHESS_DIRT.get().getDefaultState(), MSBlocks.DARK_GRAY_CHESS_DIRT.get().getDefaultState(), MSBlocks.DARK_GRAY_CHESS_DIRT.get().getDefaultState());
+	public final SurfaceBuilderConfig BLACK_CHESS_CONFIG = new SurfaceBuilderConfig(MSBlocks.BLACK_CHESS_DIRT.get().getDefaultState(), MSBlocks.BLACK_CHESS_DIRT.get().getDefaultState(), MSBlocks.BLACK_CHESS_DIRT.get().getDefaultState());
 	
 	@ObjectHolder(Minestuck.MOD_ID+":skaia")
 	public static final SkaiaSurfaceBuilder SKAIA = getNull();

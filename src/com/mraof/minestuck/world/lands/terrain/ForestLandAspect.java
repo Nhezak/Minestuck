@@ -40,10 +40,10 @@ public class ForestLandAspect extends TerrainLandAspect
 		registry.setBlockState("upper", Blocks.DIRT.getDefaultState());
 		if(type == Variant.TAIGA) {
 			registry.setBlockState("structure_primary", Blocks.SPRUCE_WOOD.getDefaultState());
-			registry.setBlockState("structure_primary_decorative", MSBlocks.FROST_WOOD.getDefaultState());
+			registry.setBlockState("structure_primary_decorative", MSBlocks.FROST_WOOD.get().getDefaultState());
 		} else {
-			registry.setBlockState("structure_primary", MSBlocks.VINE_WOOD.getDefaultState());
-			registry.setBlockState("structure_primary_decorative", MSBlocks.FLOWERY_VINE_WOOD.getDefaultState());
+			registry.setBlockState("structure_primary", MSBlocks.VINE_WOOD.get().getDefaultState());
+			registry.setBlockState("structure_primary_decorative", MSBlocks.FLOWERY_VINE_WOOD.get().getDefaultState());
 		}
 		registry.setBlockState("structure_secondary", Blocks.STONE_BRICKS.getDefaultState());
 		registry.setBlockState("structure_secondary_decorative", Blocks.CHISELED_STONE_BRICKS.getDefaultState());

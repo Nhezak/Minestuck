@@ -78,7 +78,7 @@ public class GateBlock extends Block
 			BlockPos mainPos = pos;
 			if(!state.get(MAIN))
 			{
-				if(this != MSBlocks.GATE)
+				if(this != MSBlocks.GATE.get())
 					mainPos = this.findMainComponent(pos, worldIn);
 				else return;
 			}

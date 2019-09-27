@@ -245,9 +245,9 @@ public class GlowystoneWireBlock extends Block
 		}
 	}
 	
-	protected static boolean canConnectTo(BlockState blockState)
+	protected boolean canConnectTo(BlockState blockState)
 	{
-		return blockState.getBlock() == MSBlocks.GLOWYSTONE_DUST;
+		return blockState.getBlock() == this;
 	}
 	
 	public static int colorMultiplier()

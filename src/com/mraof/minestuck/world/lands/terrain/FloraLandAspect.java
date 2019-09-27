@@ -44,12 +44,12 @@ public class FloraLandAspect extends TerrainLandAspect
 	{
 		registry.setBlockState("surface", Blocks.GRASS.getDefaultState());
 		registry.setBlockState("upper", Blocks.DIRT.getDefaultState());
-		registry.setBlockState("ocean", MSBlocks.BLOOD.getDefaultState());
+		registry.setBlockState("ocean", MSBlocks.BLOOD.get().getDefaultState());
 		registry.setBlockState("structure_primary", Blocks.MOSSY_STONE_BRICKS.getDefaultState());
-		registry.setBlockState("structure_primary_decorative", MSBlocks.FLOWERY_MOSSY_STONE_BRICKS.getDefaultState());
+		registry.setBlockState("structure_primary_decorative", MSBlocks.FLOWERY_MOSSY_STONE_BRICKS.get().getDefaultState());
 		registry.setBlockState("structure_secondary_stairs", Blocks.STONE_BRICK_STAIRS.getDefaultState());
 		registry.setBlockState("structure_secondary", Blocks.MOSSY_COBBLESTONE.getDefaultState());
-		registry.setBlockState("structure_secondary_decorative", MSBlocks.FLOWERY_MOSSY_COBBLESTONE.getDefaultState());
+		registry.setBlockState("structure_secondary_decorative", MSBlocks.FLOWERY_MOSSY_COBBLESTONE.get().getDefaultState());
 		registry.setBlockState("structure_secondary_stairs", Blocks.DARK_OAK_STAIRS.getDefaultState());
 		registry.setBlockState("village_path", Blocks.GRASS_PATH.getDefaultState());
 		registry.setBlockState("bush", Blocks.FERN.getDefaultState());
@@ -62,7 +62,7 @@ public class FloraLandAspect extends TerrainLandAspect
 		@Override
 		public BlockState pickBlock(Random random)
 		{
-			return MSBlocks.STRAWBERRY.getDefaultState().with(DirectionalBlock.FACING, Direction.random(random));
+			return MSBlocks.STRAWBERRY.get().getDefaultState().with(DirectionalBlock.FACING, Direction.random(random));
 		}
 		@Override
 		public int getCount(Random random)
@@ -108,7 +108,7 @@ public class FloraLandAspect extends TerrainLandAspect
 		list.add(new UndergroundDecoratorVein(Blocks.EMERALD_ORE.getDefaultState(), 8, 3, 32));
 		list.add(new UndergroundDecoratorVein(Blocks.DIAMOND_ORE.getDefaultState(), 8, 3, 32));
 		list.add(new UndergroundDecoratorVein(Blocks.LAPIS_ORE.getDefaultState(), 8, 3, 32));
-		list.add(new UndergroundDecoratorVein(MSBlocks.STONE_QUARTZ_ORE.getDefaultState(), 8, 5, 32));
+		list.add(new UndergroundDecoratorVein(MSBlocks.STONE_QUARTZ_ORE.get().getDefaultState(), 8, 5, 32));
 		list.add(new SurfaceDecoratorVein(Blocks.CLAY.getDefaultState(), 15, 10, MSBiomes.mediumOcean));
 		return list;
 	}

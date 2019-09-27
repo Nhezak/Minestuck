@@ -88,7 +88,7 @@ public class RabbitHoleDecorator extends SimpleStructureDecorator
 			placeBlock(world, air, 0, 0, 0);
 			placeBlock(world, air, 0, -1, 0);
 			placeBlock(world, air, 0, -1, -1);
-			placeBlock(world, MSBlocks.RABBIT_SPAWNER.getDefaultState(), 0, -1, -2);
+			placeBlock(world, MSBlocks.RABBIT_SPAWNER.get().getDefaultState(), 0, -1, -2);
 		}
 		else
 		{
@@ -96,7 +96,7 @@ public class RabbitHoleDecorator extends SimpleStructureDecorator
 			placeBlock(world, air, 0, 0, 0);
 			placeBlock(world, air, 0, -1, 0);
 			placeBlock(world, air, 0, -1, 1);
-			placeBlock(world, MSBlocks.RABBIT_SPAWNER.getDefaultState(), 0, -1, 2);
+			placeBlock(world, MSBlocks.RABBIT_SPAWNER.get().getDefaultState(), 0, -1, 2);
 		}
 		
 		return null;

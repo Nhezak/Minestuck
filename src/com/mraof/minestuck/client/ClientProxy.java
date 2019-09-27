@@ -97,7 +97,7 @@ public class ClientProxy extends CommonProxy
 	public static void initBlockColors(ColorHandlerEvent.Block event)
 	{
 		BlockColors colors = event.getBlockColors();
-		colors.register(new BlockColorCruxite(), MSBlocks.ALCHEMITER.TOTEM_PAD, MSBlocks.TOTEM_LATHE.DOWEL_ROD, MSBlocks.CRUXITE_DOWEL);
+		colors.register(new BlockColorCruxite(), MSBlocks.ALCHEMITER.TOTEM_PAD.get(), MSBlocks.TOTEM_LATHE.DOWEL_ROD.get(), MSBlocks.CRUXITE_DOWEL.get());
 		colors.register((state, worldIn, pos, tintIndex) ->
 		{
 			int age = state.get(StemBlock.AGE);
@@ -105,7 +105,7 @@ public class ClientProxy extends CommonProxy
 			int green = 255 - age * 8;
 			int blue = age * 4;
 			return red << 16 | green << 8 | blue;
-		}, MSBlocks.STRAWBERRY_STEM);
+		}, MSBlocks.STRAWBERRY_STEM.get());
 	}
 	
 	@SubscribeEvent
@@ -113,7 +113,7 @@ public class ClientProxy extends CommonProxy
 	{
 		ItemColors colors = event.getItemColors();
 		colors.register((stack, tintIndex) -> BlockColorCruxite.handleColorTint(ColorCollector.getColorFromStack(stack, 0) - 1, tintIndex),
-				MSBlocks.CRUXITE_DOWEL, MSItems.CRUXITE_APPLE, MSItems.CRUXITE_POTION);
+				MSBlocks.CRUXITE_DOWEL.get(), MSItems.CRUXITE_APPLE, MSItems.CRUXITE_POTION);
 		//colors.register(new FrogRenderer.FrogItemColor(), MinestuckItems.FROG);
 	}
 	

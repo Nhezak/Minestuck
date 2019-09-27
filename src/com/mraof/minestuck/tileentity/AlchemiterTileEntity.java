@@ -45,7 +45,7 @@ public class AlchemiterTileEntity extends TileEntity
 	
 	public void setDowel(ItemStack newDowel)
 	{
-		if(newDowel.getItem() == MSBlocks.CRUXITE_DOWEL.asItem() || newDowel.isEmpty())
+		if(newDowel.getItem() == MSBlocks.CRUXITE_DOWEL.get().asItem() || newDowel.isEmpty())
 		{
 			dowel = newDowel;
 			if(world != null)
@@ -77,7 +77,7 @@ public class AlchemiterTileEntity extends TileEntity
 		else return AlchemyRecipes.createCard(new ItemStack(AlchemyRecipes.getDecodedItem(dowel).getItem(), 1), false);
 		}
 		else */if (!AlchemyRecipes.hasDecodedItem(dowel))
-			return new ItemStack(MSBlocks.GENERIC_OBJECT);
+			return new ItemStack(MSBlocks.GENERIC_OBJECT.get());
 		else return AlchemyRecipes.getDecodedItem(dowel);
 	}
 	
@@ -232,25 +232,25 @@ public class AlchemiterTileEntity extends TileEntity
 		Direction x = direction.rotateYCCW();
 		Direction z = direction.getOpposite();
 		BlockPos pos = getPos().down();
-		if(!world.getBlockState(pos.up(3)).equals(MSBlocks.ALCHEMITER.UPPER_ROD.getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
-				!world.getBlockState(pos.up(2)).equals(MSBlocks.ALCHEMITER.LOWER_ROD.getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
+		if(!world.getBlockState(pos.up(3)).equals(MSBlocks.ALCHEMITER.UPPER_ROD.get().getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
+				!world.getBlockState(pos.up(2)).equals(MSBlocks.ALCHEMITER.LOWER_ROD.get().getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
 				//!world.getBlockState(pos.up()).equals(MinestuckBlocks.ALCHEMITER.TOTEM_PAD.getDefaultState().with(BlockAlchemiter.FACING, direction)) ||
-				!world.getBlockState(pos).equals(MSBlocks.ALCHEMITER.TOTEM_CORNER.getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
-				!world.getBlockState(pos.offset(x)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
-				!world.getBlockState(pos.offset(x, 2)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
-				!world.getBlockState(pos.offset(z).offset(x)).equals(MSBlocks.ALCHEMITER.CENTER.getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
-				!world.getBlockState(pos.offset(x, 3)).equals(MSBlocks.ALCHEMITER.CORNER.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
-				!world.getBlockState(pos.offset(z).offset(x, 3)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
-				!world.getBlockState(pos.offset(z, 2).offset(x, 3)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
-				!world.getBlockState(pos.offset(z).offset(x, 2)).equals(MSBlocks.ALCHEMITER.CENTER.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
-				!world.getBlockState(pos.offset(z, 3).offset(x, 3)).equals(MSBlocks.ALCHEMITER.CORNER.getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
-				!world.getBlockState(pos.offset(z, 3).offset(x, 2)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
-				!world.getBlockState(pos.offset(z, 3).offset(x, 1)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
-				!world.getBlockState(pos.offset(z, 2).offset(x, 2)).equals(MSBlocks.ALCHEMITER.CENTER.getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
-				!world.getBlockState(pos.offset(z, 3)).equals(MSBlocks.ALCHEMITER.CORNER.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())) ||
-				!world.getBlockState(pos.offset(z, 2)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())) ||
-				!world.getBlockState(pos.offset(z)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())) ||
-				!world.getBlockState(pos.offset(z, 2).offset(x, 1)).equals(MSBlocks.ALCHEMITER.CENTER.getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())))
+				!world.getBlockState(pos).equals(MSBlocks.ALCHEMITER.TOTEM_CORNER.get().getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
+				!world.getBlockState(pos.offset(x)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
+				!world.getBlockState(pos.offset(x, 2)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
+				!world.getBlockState(pos.offset(z).offset(x)).equals(MSBlocks.ALCHEMITER.CENTER.get().getDefaultState().with(AlchemiterBlock.FACING, direction)) ||
+				!world.getBlockState(pos.offset(x, 3)).equals(MSBlocks.ALCHEMITER.CORNER.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
+				!world.getBlockState(pos.offset(z).offset(x, 3)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
+				!world.getBlockState(pos.offset(z, 2).offset(x, 3)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
+				!world.getBlockState(pos.offset(z).offset(x, 2)).equals(MSBlocks.ALCHEMITER.CENTER.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateYCCW())) ||
+				!world.getBlockState(pos.offset(z, 3).offset(x, 3)).equals(MSBlocks.ALCHEMITER.CORNER.get().getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
+				!world.getBlockState(pos.offset(z, 3).offset(x, 2)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
+				!world.getBlockState(pos.offset(z, 3).offset(x, 1)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
+				!world.getBlockState(pos.offset(z, 2).offset(x, 2)).equals(MSBlocks.ALCHEMITER.CENTER.get().getDefaultState().with(AlchemiterBlock.FACING, direction.getOpposite())) ||
+				!world.getBlockState(pos.offset(z, 3)).equals(MSBlocks.ALCHEMITER.CORNER.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())) ||
+				!world.getBlockState(pos.offset(z, 2)).equals(MSBlocks.ALCHEMITER.LEFT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())) ||
+				!world.getBlockState(pos.offset(z)).equals(MSBlocks.ALCHEMITER.RIGHT_SIDE.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())) ||
+				!world.getBlockState(pos.offset(z, 2).offset(x, 1)).equals(MSBlocks.ALCHEMITER.CENTER.get().getDefaultState().with(AlchemiterBlock.FACING, direction.rotateY())))
 			
 		{
 			breakMachine();
@@ -337,8 +337,8 @@ public class AlchemiterTileEntity extends TileEntity
 	{
 		if(worldIn.isRemote)
 		{
-			if(state.getBlock() == MSBlocks.ALCHEMITER.CENTER || state.getBlock() == MSBlocks.ALCHEMITER.CORNER || state.getBlock() == MSBlocks.ALCHEMITER.LEFT_SIDE
-					|| state.getBlock() == MSBlocks.ALCHEMITER.RIGHT_SIDE || state.getBlock() == MSBlocks.ALCHEMITER.TOTEM_CORNER)
+			if(state.getBlock() == MSBlocks.ALCHEMITER.CENTER.get() || state.getBlock() == MSBlocks.ALCHEMITER.CORNER.get() || state.getBlock() == MSBlocks.ALCHEMITER.LEFT_SIDE.get()
+					|| state.getBlock() == MSBlocks.ALCHEMITER.RIGHT_SIDE.get() || state.getBlock() == MSBlocks.ALCHEMITER.TOTEM_CORNER.get())
 			{
 				BlockPos mainPos = pos;
 				if(!isBroken())
@@ -361,7 +361,7 @@ public class AlchemiterTileEntity extends TileEntity
 	{
 		if (isUseable(clickedState))
 		{
-			if(clickedState.getBlock() == MSBlocks.ALCHEMITER.TOTEM_PAD)
+			if(clickedState.getBlock() == MSBlocks.ALCHEMITER.TOTEM_PAD.get())
 			{
 				if (!dowel.isEmpty())
 				{    //Remove dowel from pad
@@ -375,7 +375,7 @@ public class AlchemiterTileEntity extends TileEntity
 				} else
 				{
 					ItemStack heldStack = player.getHeldItemMainhand();
-					if (!heldStack.isEmpty() && heldStack.getItem() == MSBlocks.CRUXITE_DOWEL.asItem())
+					if (!heldStack.isEmpty() && heldStack.getItem() == MSBlocks.CRUXITE_DOWEL.get().asItem())
 						setDowel(heldStack.split(1));    //Put a dowel on the pad
 				}
 			}

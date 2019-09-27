@@ -26,13 +26,14 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Supplier;
 
 public class ComputerOnBlock extends ComputerOffBlock
 {
 	public static final BooleanProperty BROKEN = MSProperties.BROKEN;
-	public final IItemProvider computerOff;
+	public final Supplier<Block> computerOff;
 	
-	public ComputerOnBlock(Properties properties, Map<Direction, VoxelShape> shape, Map<Direction, VoxelShape> collisionShape, IItemProvider computerOff)
+	public ComputerOnBlock(Properties properties, Map<Direction, VoxelShape> shape, Map<Direction, VoxelShape> collisionShape, Supplier<Block> computerOff)
 	{
 		super(properties, null, shape, collisionShape);
 		this.computerOff = computerOff;
@@ -95,7 +96,7 @@ public class ComputerOnBlock extends ComputerOffBlock
 	@Override
 	public Item asItem()
 	{
-		return computerOff.asItem();
+		return computerOff.get().asItem();	//TODO Use alternative
 	}
 	
 	@Override

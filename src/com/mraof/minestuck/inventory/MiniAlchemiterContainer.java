@@ -48,7 +48,7 @@ public class MiniAlchemiterContainer extends MachineContainer
 		this.alchemiterInventory = inventory;
 		this.wildcardHolder = wildcardHolder;
 		
-		addSlot(new InputSlot(inventory, 0, INPUT_X, INPUT_Y, MSBlocks.CRUXITE_DOWEL.asItem()));
+		addSlot(new InputSlot(inventory, 0, INPUT_X, INPUT_Y, MSBlocks.CRUXITE_DOWEL.get().asItem()));
 		addSlot(new OutputSlot(inventory, 1, OUTPUT_X, OUTPUT_Y));
 		trackInt(wildcardHolder);
 		
@@ -92,7 +92,7 @@ public class MiniAlchemiterContainer extends MachineContainer
 			} else if(slotNumber > 1)
 			{
 				//if it's an inventory slot with valid contents
-				if(itemstackOrig.getItem() == MSBlocks.CRUXITE_DOWEL.asItem())
+				if(itemstackOrig.getItem() == MSBlocks.CRUXITE_DOWEL.get().asItem())
 					result = mergeItemStack(itemstackOrig, 0, 1, false);
 			}
 			

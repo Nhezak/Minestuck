@@ -41,7 +41,7 @@ public class MiniTotemLatheTileEntity extends MachineProcessTileEntity implement
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return (index == 0 || index == 1) && stack.getItem() == MSItems.CAPTCHA_CARD || index == 2 && stack.getItem() == MSBlocks.CRUXITE_DOWEL.asItem();
+		return (index == 0 || index == 1) && stack.getItem() == MSItems.CAPTCHA_CARD || index == 2 && stack.getItem() == MSBlocks.CRUXITE_DOWEL.get().asItem();
 	}
 	
 	@Override
@@ -83,19 +83,19 @@ public class MiniTotemLatheTileEntity extends MachineProcessTileEntity implement
 		ItemStack output;
 		if (!inv.get(0).isEmpty() && !inv.get(1).isEmpty())
 			if (!inv.get(0).hasTag() || !inv.get(0).getTag().getBoolean("punched") || !inv.get(1).hasTag() || !inv.get(1).getTag().getBoolean("punched"))
-				output = new ItemStack(MSBlocks.GENERIC_OBJECT);
+				output = new ItemStack(MSBlocks.GENERIC_OBJECT.get());
 			else
 				output = CombinationRegistry.getCombination(AlchemyRecipes.getDecodedItem(inv.get(0)), AlchemyRecipes.getDecodedItem(inv.get(1)), CombinationRegistry.Mode.MODE_AND);
 		else
 		{
 			ItemStack input = inv.get(0).isEmpty() ? inv.get(1) : inv.get(0);
 			if (!input.hasTag() || !input.getTag().getBoolean("punched"))
-				output = new ItemStack(MSBlocks.GENERIC_OBJECT);
+				output = new ItemStack(MSBlocks.GENERIC_OBJECT.get());
 			else output = AlchemyRecipes.getDecodedItem(input);
 		}
 		
-		ItemStack outputDowel = output.getItem().equals(MSBlocks.GENERIC_OBJECT.asItem())
-				? new ItemStack(MSBlocks.CRUXITE_DOWEL) : AlchemyRecipes.createEncodedItem(output, false);
+		ItemStack outputDowel = output.getItem().equals(MSBlocks.GENERIC_OBJECT.get().asItem())
+				? new ItemStack(MSBlocks.CRUXITE_DOWEL.get()) : AlchemyRecipes.createEncodedItem(output, false);
 		ColorCollector.setColor(outputDowel, ColorCollector.getColorFromStack(inv.get(2), -1));	//Setting color
 		
 		setInventorySlotContents(3, outputDowel);

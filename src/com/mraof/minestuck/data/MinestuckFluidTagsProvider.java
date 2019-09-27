@@ -8,7 +8,7 @@ import com.mraof.minestuck.util.MSTags.Fluids;
 
 public class MinestuckFluidTagsProvider extends FluidTagsProvider
 {
-	public MinestuckFluidTagsProvider(DataGenerator generator)
+	MinestuckFluidTagsProvider(DataGenerator generator)
 	{
 		super(generator);
 	}

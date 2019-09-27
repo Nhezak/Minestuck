@@ -35,7 +35,7 @@ public class MiniCruxtruderItem extends BlockItem
 	
 	public static ItemStack getCruxtruderWithColor(int color)
 	{
-		ItemStack stack = new ItemStack(MSBlocks.MINI_CRUXTRUDER);
+		ItemStack stack = new ItemStack(MSBlocks.MINI_CRUXTRUDER.get());
 		stack.setTag(new CompoundNBT());
 		stack.getTag().putInt("color", color);
 		return stack;

@@ -14,501 +14,290 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nonnull;
-
-@ObjectHolder(Minestuck.MOD_ID)
 @Mod.EventBusSubscriber(modid = Minestuck.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 public class MSBlocks
 {
+	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Minestuck.MOD_ID);
+	
+	//All block properties that should be reused for multiple blocks, such as for stairs and slab blocks
+	public static final Block.Properties COARSE_STONE_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties SHADE_BRICKS_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.BLUE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties FROST_BRICKS_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties CAST_IRON_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.IRON).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties MYCELIUM_BRICKS_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.MAGENTA).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties CHALK_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties CHALK_BRICKS_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties PINK_STONE_BRICKS_PROPERTIES = Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0);
+	public static final Block.Properties RAINBOW_PLANKS_PROPERTIES = Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD);
+	public static final Block.Properties END_PLANKS_PROPERTIES = Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD);
+	public static final Block.Properties DEAD_PLANKS_PROPERTIES = Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD);
+	public static final Block.Properties TREATED_PLANKS_PROPERTIES = Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD);
+	
+	//
 	//Skaia
-	public static final Block BLACK_CHESS_DIRT = getNull(), WHITE_CHESS_DIRT = getNull(), DARK_GRAY_CHESS_DIRT = getNull(), LIGHT_GRAY_CHESS_DIRT = getNull();
-	public static final Block SKAIA_PORTAL = getNull();
+	public static final RegistryObject<Block> BLACK_CHESS_DIRT = BLOCKS.register("black_chess_dirt", () -> new Block(Block.Properties.create(Material.EARTH, MaterialColor.BLACK).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> WHITE_CHESS_DIRT = BLOCKS.register("white_chess_dirt", () -> new Block(Block.Properties.create(Material.EARTH, MaterialColor.SNOW).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> DARK_GRAY_CHESS_DIRT = BLOCKS.register("dark_gray_chess_dirt", () -> new Block(Block.Properties.create(Material.EARTH, MaterialColor.GRAY).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> LIGHT_GRAY_CHESS_DIRT = BLOCKS.register("light_gray_chess_dirt", () -> new Block(Block.Properties.create(Material.EARTH, MaterialColor.LIGHT_GRAY).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> SKAIA_PORTAL = BLOCKS.register("skaia_portal", () -> new SkaiaPortalBlock(Block.Properties.create(Material.PORTAL, MaterialColor.CYAN).doesNotBlockMovement().lightValue(11).hardnessAndResistance(-1.0F, 3600000.0F)));
 	
 	//Ores
-	public static final Block STONE_CRUXITE_ORE = getNull(), NETHERRACK_CRUXITE_ORE = getNull(), COBBLESTONE_CRUXITE_ORE = getNull(), SANDSTONE_CRUXITE_ORE = getNull();
-	public static final Block RED_SANDSTONE_CRUXITE_ORE = getNull(), END_STONE_CRUXITE_ORE = getNull(), PINK_STONE_CRUXITE_ORE = getNull();
-	public static final Block STONE_URANIUM_ORE = getNull(), NETHERRACK_URANIUM_ORE = getNull(), COBBLESTONE_URANIUM_ORE = getNull(), SANDSTONE_URANIUM_ORE = getNull();
-	public static final Block RED_SANDSTONE_URANIUM_ORE = getNull(), END_STONE_URANIUM_ORE = getNull(), PINK_STONE_URANIUM_ORE = getNull();
-	public static final Block NETHERRACK_COAL_ORE = getNull(), PINK_STONE_COAL_ORE = getNull();
-	public static final Block END_STONE_IRON_ORE = getNull(), SANDSTONE_IRON_ORE = getNull(), RED_SANDSTONE_IRON_ORE = getNull();
-	public static final Block SANDSTONE_GOLD_ORE = getNull(), RED_SANDSTONE_GOLD_ORE = getNull(), PINK_STONE_GOLD_ORE = getNull();
-	public static final Block END_STONE_REDSTONE_ORE = getNull();
-	public static final Block STONE_QUARTZ_ORE = getNull();
-	public static final Block PINK_STONE_LAPIS_ORE = getNull();
-	public static final Block PINK_STONE_DIAMOND_ORE = getNull();
+	public static final RegistryObject<Block> STONE_CRUXITE_ORE = BLOCKS.register("stone_cruxite_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> COBBLESTONE_CRUXITE_ORE = BLOCKS.register("cobblestone_cruxite_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> SANDSTONE_CRUXITE_ORE = BLOCKS.register("sandstone_cruxite_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> RED_SANDSTONE_CRUXITE_ORE = BLOCKS.register("red_sandstone_cruxite_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> NETHERRACK_CRUXITE_ORE = BLOCKS.register("netherrack_cruxite_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> END_STONE_CRUXITE_ORE = BLOCKS.register("end_stone_cruxite_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> PINK_STONE_CRUXITE_ORE = BLOCKS.register("pink_stone_cruxite_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> STONE_URANIUM_ORE = BLOCKS.register("stone_uranium_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)));
+	public static final RegistryObject<Block> COBBLESTONE_URANIUM_ORE = BLOCKS.register("cobblestone_uranium_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)));
+	public static final RegistryObject<Block> SANDSTONE_URANIUM_ORE = BLOCKS.register("sandstone_uranium_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)));
+	public static final RegistryObject<Block> RED_SANDSTONE_URANIUM_ORE = BLOCKS.register("red_sandstone_uranium_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)));
+	public static final RegistryObject<Block> NETHERRACK_URANIUM_ORE = BLOCKS.register("netherrack_uranium_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)));
+	public static final RegistryObject<Block> END_STONE_URANIUM_ORE = BLOCKS.register("end_stone_uranium_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)));
+	public static final RegistryObject<Block> PINK_STONE_URANIUM_ORE = BLOCKS.register("pink_stone_uranium_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)));
+	
+	public static final RegistryObject<Block> NETHERRACK_COAL_ORE = BLOCKS.register("netherrack_coal_ore", () -> new CustomOreBlock(0, 2, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> PINK_STONE_COAL_ORE = BLOCKS.register("pink_stone_coal_ore", () -> new CustomOreBlock(0, 2, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> SANDSTONE_IRON_ORE = BLOCKS.register("sandstone_iron_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)));
+	public static final RegistryObject<Block> RED_SANDSTONE_IRON_ORE = BLOCKS.register("red_sandstone_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)));
+	public static final RegistryObject<Block> END_STONE_IRON_ORE = BLOCKS.register("end_stone_iron_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)));
+	public static final RegistryObject<Block> SANDSTONE_GOLD_ORE = BLOCKS.register("sandstone_gold_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)));
+	public static final RegistryObject<Block> RED_SANDSTONE_GOLD_ORE = BLOCKS.register("red_sandstone_gold_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)));
+	public static final RegistryObject<Block> PINK_STONE_GOLD_ORE = BLOCKS.register("pink_stone_gold_ore", () -> new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)));
+	public static final RegistryObject<Block> END_STONE_REDSTONE_ORE = BLOCKS.register("end_stone_redstone_ore", () -> new CustomOreBlock(1, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)));
+	public static final RegistryObject<Block> STONE_QUARTZ_ORE = BLOCKS.register("stone_quartz_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> PINK_STONE_LAPIS_ORE = BLOCKS.register("pink_stone_lapis_ore", () -> new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)));
+	public static final RegistryObject<Block> PINK_STONE_DIAMOND_ORE = BLOCKS.register("pink_stone_diamond_ore", () -> new CustomOreBlock(3, 7, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)));
 	
 	//Resource Blocks
-	public static final Block CRUXITE_BLOCK = getNull();
-	public static final Block URANIUM_BLOCK = getNull();
-	public static final Block GENERIC_OBJECT = getNull();
+	public static final RegistryObject<Block> CRUXITE_BLOCK = BLOCKS.register("cruxite_block", () -> new Block(Block.Properties.create(Material.ROCK, DyeColor.LIGHT_BLUE).hardnessAndResistance(3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> URANIUM_BLOCK = BLOCKS.register("uranium_block", () -> new Block(Block.Properties.create(Material.ROCK, DyeColor.LIME).hardnessAndResistance(3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0).lightValue(7)));
+	public static final RegistryObject<Block> GENERIC_OBJECT = BLOCKS.register("generic_object", () -> new Block(Block.Properties.create(Material.GOURD, DyeColor.LIME).hardnessAndResistance(1.0F).sound(SoundType.WOOD)));
 	
 	//Land Environment Blocks
-	public static final Block BLUE_DIRT = getNull(), THOUGHT_DIRT = getNull();
-	public static final Block COARSE_STONE = getNull(), CHISELED_COARSE_STONE = getNull();
-	public static final Block SHADE_BRICKS = getNull(), SMOOTH_SHADE_STONE = getNull();
-	public static final Block FROST_BRICKS = getNull(), FROST_TILE = getNull(), CHISELED_FROST_BRICKS = getNull();
-	public static final Block CAST_IRON = getNull(), CHISELED_CAST_IRON = getNull();
-	public static final Block MYCELIUM_BRICKS = getNull();
-	public static final Block BLACK_STONE = getNull();
-	public static final Block FLOWERY_MOSSY_COBBLESTONE = getNull(), FLOWERY_MOSSY_STONE_BRICKS = getNull();
-	public static final Block COARSE_END_STONE = getNull(), END_GRASS = getNull();
-	public static final Block CHALK = getNull(), POLISHED_CHALK = getNull(), CHALK_BRICKS = getNull(), CHISELED_CHALK_BRICKS = getNull();
-	public static final Block PINK_STONE = getNull(), POLISHED_PINK_STONE = getNull(), PINK_STONE_BRICKS = getNull(), CHISELED_PINK_STONE_BRICKS = getNull();
-	public static final Block CRACKED_PINK_STONE_BRICKS = getNull(), MOSSY_PINK_STONE_BRICKS = getNull();
-	public static final Block DENSE_CLOUD = getNull(), BRIGHT_DENSE_CLOUD = getNull();
-	public static final Block SUGAR_CUBE = getNull();
+	public static final RegistryObject<Block> BLUE_DIRT = BLOCKS.register("blue_dirt", () -> new Block(Block.Properties.create(Material.EARTH, MaterialColor.BLUE).hardnessAndResistance(0.5F).lightValue(11).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> THOUGHT_DIRT = BLOCKS.register("thought_dirt", () -> new Block(Block.Properties.create(Material.EARTH, MaterialColor.LIME).hardnessAndResistance(0.5F).lightValue(11).sound(SoundType.GROUND)));
+	public static final RegistryObject<Block> COARSE_STONE = BLOCKS.register("coarse_stone", () -> new Block(COARSE_STONE_PROPERTIES));
+	public static final RegistryObject<Block> CHISELED_COARSE_STONE = BLOCKS.register("chiseled_coarse_stone", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> SHADE_BRICKS = BLOCKS.register("shade_bricks", () -> new Block(SHADE_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> SMOOTH_SHADE_STONE = BLOCKS.register("smooth_shade_stone", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLUE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> FROST_BRICKS = BLOCKS.register("frost_bricks", () -> new Block(FROST_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> FROST_TILE = BLOCKS.register("frost_tile", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> CHISELED_FROST_BRICKS = BLOCKS.register("chiseled_frost_bricks", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> CAST_IRON = BLOCKS.register("cast_iron", () -> new Block(CAST_IRON_PROPERTIES));
+	public static final RegistryObject<Block> CHISELED_CAST_IRON = BLOCKS.register("chiseled_cast_iron", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.IRON).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> MYCELIUM_BRICKS = BLOCKS.register("mycelium_bricks", () -> new Block(MYCELIUM_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> BLACK_STONE = BLOCKS.register("black_stone", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(2.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> FLOWERY_MOSSY_COBBLESTONE = BLOCKS.register("flowery_mossy_cobblestone", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> FLOWERY_MOSSY_STONE_BRICKS = BLOCKS.register("flowery_mossy_stone_bricks", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> COARSE_END_STONE = BLOCKS.register("coarse_end_stone", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.SAND).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> END_GRASS = BLOCKS.register("end_grass", () -> new EndGrassBlock(Block.Properties.create(Material.ROCK, MaterialColor.PURPLE).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.SHOVEL).tickRandomly()));
+	public static final RegistryObject<Block> CHALK = BLOCKS.register("chalk", () -> new Block(CHALK_PROPERTIES));
+	public static final RegistryObject<Block> POLISHED_CHALK = BLOCKS.register("polished_chalk", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> CHALK_BRICKS = BLOCKS.register("chalk_bricks", () -> new Block(CHALK_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> CHISELED_CHALK_BRICKS = BLOCKS.register("chiseled_chalk_bricks", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> PINK_STONE = BLOCKS.register("pink_stone", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> POLISHED_PINK_STONE = BLOCKS.register("polished_pink_stone", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> PINK_STONE_BRICKS = BLOCKS.register("pink_stone_bricks", () -> new Block(PINK_STONE_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> CHISELED_PINK_STONE_BRICKS = BLOCKS.register("chiseled_pink_stone_bricks", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> CRACKED_PINK_STONE_BRICKS = BLOCKS.register("cracked_pink_stone_bricks", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> MOSSY_PINK_STONE_BRICKS = BLOCKS.register("mossy_pink_stone_bricks", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
+	public static final RegistryObject<Block> DENSE_CLOUD = BLOCKS.register("dense_cloud", () -> new Block(Block.Properties.create(Material.GLASS, MaterialColor.YELLOW).hardnessAndResistance(0.5F).sound(SoundType.SNOW)));
+	public static final RegistryObject<Block> BRIGHT_DENSE_CLOUD = BLOCKS.register("bright_dense_cloud", () -> new Block(Block.Properties.create(Material.GLASS, MaterialColor.LIGHT_GRAY).hardnessAndResistance(0.5F).sound(SoundType.SNOW)));
+	public static final RegistryObject<Block> SUGAR_CUBE = BLOCKS.register("sugar_cube", () -> new Block(Block.Properties.create(Material.SAND, MaterialColor.SNOW).hardnessAndResistance(0.4F).sound(SoundType.SAND)));
 	
 	//Land Tree Blocks
-	public static final Block GLOWING_LOG = getNull(), FROST_LOG = getNull(), RAINBOW_LOG = getNull(), END_LOG = getNull();
-	public static final Block VINE_LOG = getNull(), FLOWERY_VINE_LOG = getNull(), DEAD_LOG = getNull(), PETRIFIED_LOG = getNull();
-	public static final Block GLOWING_WOOD = getNull(), FROST_WOOD = getNull(), RAINBOW_WOOD = getNull(), END_WOOD = getNull();
-	public static final Block VINE_WOOD = getNull(), FLOWERY_VINE_WOOD = getNull(), DEAD_WOOD = getNull(), PETRIFIED_WOOD = getNull();
-	public static final Block GLOWING_PLANKS = getNull(), FROST_PLANKS = getNull(), RAINBOW_PLANKS = getNull(), END_PLANKS = getNull();
-	public static final Block DEAD_PLANKS = getNull(), TREATED_PLANKS = getNull();
-	public static final Block FROST_LEAVES = getNull(), RAINBOW_LEAVES = getNull(), END_LEAVES = getNull();
-	public static final BushBlock RAINBOW_SAPLING = getNull(), END_SAPLING = getNull();
+	public static final RegistryObject<Block> GLOWING_LOG = BLOCKS.register("glowing_log", () -> new FlammableLogBlock(MaterialColor.LIGHT_BLUE, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).lightValue(11).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> GLOWING_WOOD = BLOCKS.register("glowing_wood", () -> new FlammableLogBlock(MaterialColor.LIGHT_BLUE, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).lightValue(11).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> GLOWING_PLANKS = BLOCKS.register("glowing_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).lightValue(7).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> FROST_LOG = BLOCKS.register("frost_log", () -> new FlammableLogBlock(MaterialColor.ICE, Block.Properties.create(Material.WOOD, MaterialColor.ICE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> FROST_WOOD = BLOCKS.register("frost_wood", () -> new FlammableLogBlock(MaterialColor.ICE, Block.Properties.create(Material.WOOD, MaterialColor.ICE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> FROST_PLANKS = BLOCKS.register("frost_planks", () -> new FlammableBlock(5, 5, Block.Properties.create(Material.WOOD, MaterialColor.ICE).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> FROST_LEAVES = BLOCKS.register("frost_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> RAINBOW_LOG = BLOCKS.register("rainbow_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> RAINBOW_WOOD = BLOCKS.register("rainbow_wood", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> RAINBOW_PLANKS = BLOCKS.register("rainbow_planks", () -> new FlammableBlock(5, 20, RAINBOW_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> RAINBOW_LEAVES = BLOCKS.register("rainbow_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> RAINBOW_SAPLING = BLOCKS.register("rainbow_sapling", () -> new RainbowSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> END_LOG = BLOCKS.register("end_log", () -> new DoubleLogBlock(MaterialColor.SAND, 1, 250, Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> END_WOOD = BLOCKS.register("end_wood", () -> new FlammableLogBlock(MaterialColor.SAND, 1, 250, Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> END_PLANKS = BLOCKS.register("end_planks", () -> new FlammableBlock(1, 250, END_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> END_LEAVES = BLOCKS.register("end_leaves", () -> new EndLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> END_SAPLING = BLOCKS.register("end_sapling", () -> new EndSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> VINE_LOG = BLOCKS.register("vine_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> VINE_WOOD = BLOCKS.register("vine_wood", () -> new FlammableLogBlock(MaterialColor.OBSIDIAN, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> FLOWERY_VINE_LOG = BLOCKS.register("flowery_vine_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> FLOWERY_VINE_WOOD = BLOCKS.register("flowery_vine_wood", () -> new FlammableLogBlock(MaterialColor.OBSIDIAN, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> DEAD_LOG = BLOCKS.register("dead_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> DEAD_WOOD = BLOCKS.register("dead_wood", () -> new FlammableLogBlock(MaterialColor.OBSIDIAN, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> DEAD_PLANKS = BLOCKS.register("dead_planks", () -> new FlammableBlock(5, 5, DEAD_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> PETRIFIED_LOG = BLOCKS.register("petrified_log", () -> new FlammableLogBlock(MaterialColor.WOOD, 0, 0, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> PETRIFIED_WOOD = BLOCKS.register("petrified_wood", () -> new FlammableLogBlock(MaterialColor.OBSIDIAN, 0, 0, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> TREATED_PLANKS = BLOCKS.register("treated_planks", () -> new FlammableBlock(1, 0, TREATED_PLANKS_PROPERTIES));
 	
 	//Aspect Tree Blocks
-	public static final Block BLOOD_ASPECT_LOG = getNull(), BREATH_ASPECT_LOG = getNull(), DOOM_ASPECT_LOG = getNull(), HEART_ASPECT_LOG = getNull();
-	public static final Block HOPE_ASPECT_LOG = getNull(), LIFE_ASPECT_LOG = getNull(), LIGHT_ASPECT_LOG = getNull(), MIND_ASPECT_LOG = getNull();
-	public static final Block RAGE_ASPECT_LOG = getNull(), SPACE_ASPECT_LOG = getNull(), TIME_ASPECT_LOG = getNull(), VOID_ASPECT_LOG = getNull();
-	public static final Block BLOOD_ASPECT_PLANKS = getNull(), BREATH_ASPECT_PLANKS = getNull(), DOOM_ASPECT_PLANKS = getNull(), HEART_ASPECT_PLANKS = getNull();
-	public static final Block HOPE_ASPECT_PLANKS = getNull(), LIFE_ASPECT_PLANKS = getNull(), LIGHT_ASPECT_PLANKS = getNull(), MIND_ASPECT_PLANKS = getNull();
-	public static final Block RAGE_ASPECT_PLANKS = getNull(), SPACE_ASPECT_PLANKS = getNull(), TIME_ASPECT_PLANKS = getNull(), VOID_ASPECT_PLANKS = getNull();
-	public static final Block BLOOD_ASPECT_LEAVES = getNull(), BREATH_ASPECT_LEAVES = getNull(), DOOM_ASPECT_LEAVES = getNull(), HEART_ASPECT_LEAVES = getNull();
-	public static final Block HOPE_ASPECT_LEAVES = getNull(), LIFE_ASPECT_LEAVES = getNull(), LIGHT_ASPECT_LEAVES = getNull(), MIND_ASPECT_LEAVES = getNull();
-	public static final Block RAGE_ASPECT_LEAVES = getNull(), SPACE_ASPECT_LEAVES = getNull(), TIME_ASPECT_LEAVES = getNull(), VOID_ASPECT_LEAVES = getNull();
-	public static final Block BLOOD_ASPECT_SAPLING = getNull(), BREATH_ASPECT_SAPLING = getNull(), DOOM_ASPECT_SAPLING = getNull(), HEART_ASPECT_SAPLING = getNull();
-	public static final Block HOPE_ASPECT_SAPLING = getNull(), LIFE_ASPECT_SAPLING = getNull(), LIGHT_ASPECT_SAPLING = getNull(), MIND_ASPECT_SAPLING = getNull();
-	public static final Block RAGE_ASPECT_SAPLING = getNull(), SPACE_ASPECT_SAPLING = getNull(), TIME_ASPECT_SAPLING = getNull(), VOID_ASPECT_SAPLING = getNull();
+	public static final RegistryObject<Block> BLOOD_ASPECT_LOG = BLOCKS.register("blood_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> BLOOD_ASPECT_PLANKS = BLOCKS.register("blood_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> BLOOD_ASPECT_LEAVES = BLOCKS.register("blood_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> BLOOD_ASPECT_SAPLING = BLOCKS.register("blood_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> BREATH_ASPECT_LOG = BLOCKS.register("breath_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> BREATH_ASPECT_PLANKS = BLOCKS.register("breath_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> BREATH_ASPECT_LEAVES = BLOCKS.register("breath_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> BREATH_ASPECT_SAPLING = BLOCKS.register("breath_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> DOOM_ASPECT_LOG = BLOCKS.register("doom_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> DOOM_ASPECT_PLANKS = BLOCKS.register("doom_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> DOOM_ASPECT_LEAVES = BLOCKS.register("doom_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> DOOM_ASPECT_SAPLING = BLOCKS.register("doom_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> HEART_ASPECT_LOG = BLOCKS.register("heart_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> HEART_ASPECT_PLANKS = BLOCKS.register("heart_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> HEART_ASPECT_LEAVES = BLOCKS.register("heart_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> HEART_ASPECT_SAPLING = BLOCKS.register("heart_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> HOPE_ASPECT_LOG = BLOCKS.register("hope_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> HOPE_ASPECT_PLANKS = BLOCKS.register("hope_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> HOPE_ASPECT_LEAVES = BLOCKS.register("hope_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> HOPE_ASPECT_SAPLING = BLOCKS.register("hope_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> LIFE_ASPECT_LOG = BLOCKS.register("life_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> LIFE_ASPECT_PLANKS = BLOCKS.register("life_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> LIFE_ASPECT_LEAVES = BLOCKS.register("life_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> LIFE_ASPECT_SAPLING = BLOCKS.register("life_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> LIGHT_ASPECT_LOG = BLOCKS.register("light_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> LIGHT_ASPECT_PLANKS = BLOCKS.register("light_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> LIGHT_ASPECT_LEAVES = BLOCKS.register("light_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> LIGHT_ASPECT_SAPLING = BLOCKS.register("light_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> MIND_ASPECT_LOG = BLOCKS.register("mind_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> MIND_ASPECT_PLANKS = BLOCKS.register("mind_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> MIND_ASPECT_LEAVES = BLOCKS.register("mind_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> MIND_ASPECT_SAPLING = BLOCKS.register("mind_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> RAGE_ASPECT_LOG = BLOCKS.register("rage_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> RAGE_ASPECT_PLANKS = BLOCKS.register("rage_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> RAGE_ASPECT_LEAVES = BLOCKS.register("rage_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> RAGE_ASPECT_SAPLING = BLOCKS.register("rage_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> SPACE_ASPECT_LOG = BLOCKS.register("space_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> SPACE_ASPECT_PLANKS = BLOCKS.register("space_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> SPACE_ASPECT_LEAVES = BLOCKS.register("space_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> SPACE_ASPECT_SAPLING = BLOCKS.register("space_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> TIME_ASPECT_LOG = BLOCKS.register("time_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> TIME_ASPECT_PLANKS = BLOCKS.register("time_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> TIME_ASPECT_LEAVES = BLOCKS.register("time_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> TIME_ASPECT_SAPLING = BLOCKS.register("time_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> VOID_ASPECT_LOG = BLOCKS.register("void_aspect_log", () -> new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> VOID_ASPECT_PLANKS = BLOCKS.register("void_aspect_planks", () -> new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> VOID_ASPECT_LEAVES = BLOCKS.register("void_aspect_leaves", () -> new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> VOID_ASPECT_SAPLING = BLOCKS.register("void_aspect_sapling", () -> new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)));
 	
 	//Land Plant Blocks
-	public static final Block GLOWING_MUSHROOM = getNull();
-	public static final Block DESERT_BUSH = getNull();
-	public static final Block BLOOMING_CACTUS = getNull();
-	public static final Block PETRIFIED_GRASS = getNull();
-	public static final Block PETRIFIED_POPPY = getNull();
-	public static final Block STRAWBERRY = getNull(), ATTACHED_STRAWBERRY_STEM = getNull(), STRAWBERRY_STEM = getNull();
+	public static final RegistryObject<Block> GLOWING_MUSHROOM = BLOCKS.register("glowing_mushroom", () -> new GlowingMushroomBlock(Block.Properties.create(Material.PLANTS, MaterialColor.DIAMOND).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT).lightValue(11)));
+	public static final RegistryObject<Block> DESERT_BUSH = BLOCKS.register("desert_bush", () -> new DesertFloraBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> BLOOMING_CACTUS = BLOCKS.register("blooming_cactus", () -> new DesertFloraBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT)));
+	public static final RegistryObject<Block> PETRIFIED_GRASS = BLOCKS.register("petrified_grass", () -> new PetrifiedFloraBlock(Block.Properties.create(Material.ROCK, DyeColor.GRAY).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.STONE)));
+	public static final RegistryObject<Block> PETRIFIED_POPPY = BLOCKS.register("petrified_poppy", () -> new PetrifiedFloraBlock(Block.Properties.create(Material.ROCK, DyeColor.GRAY).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.STONE)));
+	public static final RegistryObject<StemGrownBlock> STRAWBERRY = BLOCKS.register("strawberry", () -> new StrawberryBlock(Block.Properties.create(Material.GOURD, MaterialColor.RED).hardnessAndResistance(1.0F).sound(SoundType.WOOD)));
+	public static final RegistryObject<StemBlock> STRAWBERRY_STEM = BLOCKS.register("strawberry_stem", () -> new StrawberryBlock.Stem(STRAWBERRY, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.WOOD)));
+	public static final RegistryObject<AttachedStemBlock> ATTACHED_STRAWBERRY_STEM = BLOCKS.register("attached_strawberry_stem", () -> new StrawberryBlock.AttachedStem(STRAWBERRY, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.WOOD)));
 	
 	//Special Land Blocks
-	public static final Block LAYERED_SAND = getNull(), LAYERED_RED_SAND = getNull();
-	public static final Block GLOWY_GOOP = getNull();
-	public static final Block COAGULATED_BLOOD = getNull();
-	public static final Block VEIN = getNull();
-	public static final Block VEIN_CORNER = getNull();
-	public static final Block VEIN_CORNER_INVERTED = getNull();
+	public static final RegistryObject<Block> LAYERED_SAND = BLOCKS.register("layered_sand", () -> new LayeredBlock(Block.Properties.from(Blocks.SAND)));
+	public static final RegistryObject<Block> LAYERED_RED_SAND = BLOCKS.register("layered_red_sand", () -> new LayeredBlock(Block.Properties.from(Blocks.RED_SAND)));
+	public static final RegistryObject<Block> GLOWING_GOOP = BLOCKS.register("glowing_goop", () -> new GoopBlock(Block.Properties.create(Material.CLAY).hardnessAndResistance(0.1F).sound(SoundType.SLIME).lightValue(14)));
+	public static final RegistryObject<Block> COAGULATED_BLOOD = BLOCKS.register("coagulated_blood", () -> new GoopBlock(Block.Properties.create(Material.CLAY).hardnessAndResistance(0.1F).sound(SoundType.SLIME)));
+	public static final RegistryObject<Block> VEIN = BLOCKS.register("vein", () -> new VeinBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.45F).sound(SoundType.SLIME)));
+	public static final RegistryObject<Block> VEIN_CORNER = BLOCKS.register("vein_corner", () -> new VeinCornerBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.45F).sound(SoundType.SLIME)));
+	public static final RegistryObject<Block> INVERTED_VEIN_CORNER = BLOCKS.register("inverted_vein_corner", () -> new VeinCornerBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.45F).sound(SoundType.SLIME)));
 	
 	//Structure Land Blocks
-	public static final Block COARSE_STONE_STAIRS = getNull(), SHADE_BRICK_STAIRS = getNull(), FROST_BRICK_STAIRS = getNull(), CAST_IRON_STAIRS = getNull();
-	public static final Block MYCELIUM_BRICK_STAIRS = getNull(), CHALK_STAIRS = getNull(), CHALK_BRICK_STAIRS = getNull(), PINK_STONE_BRICK_STAIRS = getNull();
-	public static final Block RAINBOW_PLANKS_STAIRS = getNull(), END_PLANKS_STAIRS = getNull(), DEAD_PLANKS_STAIRS = getNull(), TREATED_PLANKS_STAIRS = getNull();
-	public static final Block CHALK_SLAB = getNull(), CHALK_BRICK_SLAB = getNull(), PINK_STONE_BRICK_SLAB = getNull();
-	public static final Block RAINBOW_PLANKS_SLAB = getNull(), END_PLANKS_SLAB = getNull(), DEAD_PLANKS_SLAB = getNull(), TREATED_PLANKS_SLAB = getNull();
+	public static final RegistryObject<Block> COARSE_STONE_STAIRS = BLOCKS.register("coarse_stone_stairs", () -> new ModStairsBlock(COARSE_STONE.lazyMap(Block::getDefaultState), COARSE_STONE_PROPERTIES));
+	public static final RegistryObject<Block> SHADE_BRICK_STAIRS = BLOCKS.register("shade_brick_stairs", () -> new ModStairsBlock(SHADE_BRICKS.lazyMap(Block::getDefaultState), SHADE_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> FROST_BRICK_STAIRS = BLOCKS.register("frost_brick_stairs", () -> new ModStairsBlock(FROST_BRICKS.lazyMap(Block::getDefaultState), FROST_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> CAST_IRON_STAIRS = BLOCKS.register("cast_iron_stairs", () -> new ModStairsBlock(CAST_IRON.lazyMap(Block::getDefaultState), CAST_IRON_PROPERTIES));
+	public static final RegistryObject<Block> MYCELIUM_BRICK_STAIRS = BLOCKS.register("mycelium_brick_stairs", () -> new ModStairsBlock(MYCELIUM_BRICKS.lazyMap(Block::getDefaultState), MYCELIUM_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> CHALK_STAIRS = BLOCKS.register("chalk_stairs", () -> new ModStairsBlock(CHALK.lazyMap(Block::getDefaultState), CHALK_PROPERTIES));
+	public static final RegistryObject<Block> CHALK_SLAB = BLOCKS.register("chalk_slab", () -> new SlabBlock(CHALK_PROPERTIES));
+	public static final RegistryObject<Block> CHALK_BRICK_STAIRS = BLOCKS.register("chalk_brick_stairs", () -> new ModStairsBlock(CHALK_BRICKS.lazyMap(Block::getDefaultState), CHALK_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> CHALK_BRICK_SLAB = BLOCKS.register("chalk_brick_slab", () -> new SlabBlock(CHALK_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> PINK_STONE_BRICK_STAIRS = BLOCKS.register("pink_stone_brick_stairs", () -> new ModStairsBlock(PINK_STONE_BRICKS.lazyMap(Block::getDefaultState), PINK_STONE_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> PINK_STONE_BRICK_SLAB = BLOCKS.register("pink_stone_Brick_slab", () -> new SlabBlock(PINK_STONE_BRICKS_PROPERTIES));
+	public static final RegistryObject<Block> RAINBOW_PLANKS_STAIRS = BLOCKS.register("rainbow_planks_stairs", () -> new ModStairsBlock(RAINBOW_PLANKS.lazyMap(Block::getDefaultState), RAINBOW_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> RAINBOW_PLANKS_SLAB = BLOCKS.register("rainbow_planks_slab", () -> new SlabBlock(RAINBOW_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> END_PLANKS_STAIRS = BLOCKS.register("end_planks_stairs", () -> new ModStairsBlock(END_PLANKS.lazyMap(Block::getDefaultState), END_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> END_PLANKS_SLAB = BLOCKS.register("end_planks_slab", () -> new SlabBlock(END_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> DEAD_PLANKS_STAIRS = BLOCKS.register("dead_planks_stairs", () -> new ModStairsBlock(DEAD_PLANKS.lazyMap(Block::getDefaultState), DEAD_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> DEAD_PLANKS_SLAB = BLOCKS.register("dead_planks_slab", () -> new SlabBlock(DEAD_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> TREATED_PLANKS_STAIRS = BLOCKS.register("treated_planks_stairs", () -> new ModStairsBlock(TREATED_PLANKS.lazyMap(Block::getDefaultState), TREATED_PLANKS_PROPERTIES));
+	public static final RegistryObject<Block> TREATED_PLANKS_SLAB = BLOCKS.register("treated_planks_slab", () -> new SlabBlock(TREATED_PLANKS_PROPERTIES));
 	
 	//Core Functional Land Blocks
-	public static final Block GATE = getNull();
-	public static final Block RETURN_NODE = getNull();
+	public static final RegistryObject<Block> GATE = BLOCKS.register("gate", () -> new GateBlock(Block.Properties.create(Material.PORTAL).doesNotBlockMovement().hardnessAndResistance(-1.0F, 25.0F).sound(SoundType.GLASS).lightValue(11)));
+	public static final RegistryObject<Block> RETURN_NODE = BLOCKS.register("return_node", () -> new ReturnNodeBlock(Block.Properties.create(Material.PORTAL).doesNotBlockMovement().hardnessAndResistance(-1.0F, 10.0F).sound(SoundType.GLASS).lightValue(11)));
 	
 	//Misc Functional Land Blocks
-	public static final Block RABBIT_SPAWNER = getNull();
+	public static final RegistryObject<Block> RABBIT_SPAWNER = BLOCKS.register("rabbit_spawner", () -> new MobSpawnerBlock(Block.Properties.create(Material.AIR).tickRandomly().doesNotBlockMovement()));
 	
 	//Sburb Machines
-	public static CruxtruderMultiblock CRUXTRUDER;	//TODO Figure out how the multiblocks should fit in with objectholders
-	public static final Block CRUXTRUDER_LID = getNull();
-	public static TotemLatheMultiblock TOTEM_LATHE;
-	public static AlchemiterMultiblock ALCHEMITER;
-	public static PunchDesignixMultiblock PUNCH_DESIGNIX;
-	public static final Block MINI_CRUXTRUDER = getNull();
-	public static final Block MINI_TOTEM_LATHE = getNull();
-	public static final Block MINI_ALCHEMITER = getNull();
-	public static final Block MINI_PUNCH_DESIGNIX = getNull();
-	//public static final Block HOLOPAD = getNull();
-	/*public static BlockJumperBlock[] jumperBlockExtension = BlockJumperBlock.createBlocks();
-	public static BlockAlchemiterUpgrades[] alchemiterUpgrades = BlockAlchemiterUpgrades.createBlocks();*/
+	public static final CruxtruderMultiblock CRUXTRUDER = new CruxtruderMultiblock(BLOCKS, "cruxtruder");
+	public static final RegistryObject<Block> CRUXTRUDER_LID = BLOCKS.register("cruxtruder_lid", () -> new CruxtruderLidBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.0F)));
+	public static final TotemLatheMultiblock TOTEM_LATHE = new TotemLatheMultiblock(BLOCKS, "totem_lathe");
+	public static final AlchemiterMultiblock ALCHEMITER = new AlchemiterMultiblock(BLOCKS, "alchemiter");
+	public static final PunchDesignixMultiblock PUNCH_DESIGNIX = new PunchDesignixMultiblock(BLOCKS, "punch_designix");
+	public static final RegistryObject<Block> MINI_CRUXTRUDER = BLOCKS.register("mini_cruxtruder", () -> new MiniCruxtruderBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)));
+	public static final RegistryObject<Block> MINI_TOTEM_LATHE = BLOCKS.register("mini_totem_lathe", () -> new MiniTotemLatheBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)));
+	public static final RegistryObject<Block> MINI_ALCHEMITER = BLOCKS.register("mini_alchemiter", () -> new MiniAlchemiterBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)));
+	public static final RegistryObject<Block> MINI_PUNCH_DESIGNIX = BLOCKS.register("mini_punch_designix", () -> new MiniPunchDesignixBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)));
+	//public static final RegistryObject<Block> HOLOPAD = BLOCKS.register("holopad", () -> new BlockHolopad(Block.Properties.create(Material.IRON, MaterialColor.SNOW).hardnessAndResistance(3.0F)));
 	
 	//Misc Machines
-	public static final Block COMPUTER_ON = getNull(), COMPUTER_OFF = getNull();
-	public static final Block LAPTOP_ON = getNull(), LAPTOP_OFF = getNull();
-	public static final Block CROCKERTOP_ON = getNull(), CROCKERTOP_OFF = getNull();
-	public static final Block HUBTOP_ON = getNull(), HUBTOP_OFF = getNull();
-	public static final Block LUNCHTOP_ON = getNull(), LUNCHTOP_OFF = getNull();
-	public static final Block TRANSPORTALIZER = getNull();
-	public static final Block GRIST_WIDGET = getNull();
-	public static final Block URANIUM_COOKER = getNull();
+	public static final RegistryObject<Block> COMPUTER_OFF = BLOCKS.register("computer_off", () -> new ComputerOffBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), MSBlocks.COMPUTER_ON, ComputerOffBlock.COMPUTER_SHAPE, ComputerOffBlock.COMPUTER_COLLISION_SHAPE));
+	public static final RegistryObject<Block> COMPUTER_ON = BLOCKS.register("computer_on", () -> new ComputerOnBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), ComputerOffBlock.COMPUTER_SHAPE, ComputerOffBlock.COMPUTER_COLLISION_SHAPE, MSBlocks.COMPUTER_OFF));
+	public static final RegistryObject<Block> LAPTOP_OFF = BLOCKS.register("laptop_off", () -> new ComputerOffBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), MSBlocks.LAPTOP_ON, ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE));
+	public static final RegistryObject<Block> LAPTOP_ON = BLOCKS.register("laptop_on", () -> new ComputerOnBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE, MSBlocks.LAPTOP_OFF));
+	public static final RegistryObject<Block> CROCKERTOP_OFF = BLOCKS.register("crockertop_off", () -> new ComputerOffBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), MSBlocks.CROCKERTOP_ON, ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE));
+	public static final RegistryObject<Block> CROCKERTOP_ON = BLOCKS.register("crockertop_on", () -> new ComputerOnBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE, MSBlocks.CROCKERTOP_OFF));
+	public static final RegistryObject<Block> HUBTOP_OFF = BLOCKS.register("hubtop_off", () -> new ComputerOffBlock(Block.Properties.create(Material.IRON, MaterialColor.GREEN).hardnessAndResistance(4.0F), MSBlocks.HUBTOP_ON, ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE));
+	public static final RegistryObject<Block> HUBTOP_ON = BLOCKS.register("hubtop_on", () -> new ComputerOnBlock(Block.Properties.create(Material.IRON, MaterialColor.GREEN).hardnessAndResistance(4.0F), ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE, MSBlocks.HUBTOP_OFF));
+	public static final RegistryObject<Block> LUNCHTOP_OFF = BLOCKS.register("lunchtop_off", () -> new ComputerOffBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), MSBlocks.LUNCHTOP_ON, ComputerOffBlock.LUNCHTOP_SHAPE, ComputerOffBlock.LUNCHTOP_SHAPE));
+	public static final RegistryObject<Block> LUNCHTOP_ON = BLOCKS.register("lunchtop_on", () -> new ComputerOnBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), ComputerOffBlock.LUNCHTOP_SHAPE, ComputerOffBlock.LUNCHTOP_SHAPE, MSBlocks.LUNCHTOP_OFF));
+	public static final RegistryObject<Block> TRANSPORTALIZER = BLOCKS.register("transportalizer", () -> new TransportalizerBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)));
+	public static final RegistryObject<Block> GRIST_WIDGET = BLOCKS.register("grist_widget", () -> new GristWidgetBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)));
+	public static final RegistryObject<Block> URANIUM_COOKER = BLOCKS.register("uranium_cooker", () -> new UraniumCookerBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)));
 	
 	//Misc Core Objects
-	public static final Block CRUXITE_DOWEL = getNull();
+	public static final RegistryObject<Block> CRUXITE_DOWEL = BLOCKS.register("cruxite_dowel", () -> new CruxiteDowelBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.0F)));
 	
 	//Misc Alchemy Semi-Plants
-	public static final Block GOLD_SEEDS = getNull();
-	public static final Block WOODEN_CACTUS = getNull();
+	public static final RegistryObject<Block> GOLD_SEEDS = BLOCKS.register("gold_seeds", () -> new GoldSeedsBlock(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.METAL).doesNotBlockMovement()));
+	public static final RegistryObject<Block> WOODEN_CACTUS = BLOCKS.register("wooden_cactus", () -> new SpecialCactusBlock(Block.Properties.create(Material.WOOD).tickRandomly().hardnessAndResistance(1.0F, 2.5F).sound(SoundType.WOOD), ToolType.AXE));
 	
 	//Cakes
-	public static final Block APPLE_CAKE = getNull();
-	public static final Block BLUE_CAKE = getNull();
-	public static final Block COLD_CAKE = getNull();
-	public static final Block RED_CAKE = getNull();
-	public static final Block HOT_CAKE = getNull();
-	public static final Block REVERSE_CAKE = getNull();
-	public static final Block FUCHSIA_CAKE = getNull();
+	public static final RegistryObject<Block> APPLE_CAKE = BLOCKS.register("apple_cake", () -> new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.5F, null));
+	public static final RegistryObject<Block> BLUE_CAKE = BLOCKS.register("blue_cake", () -> new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.3F, player -> player.addPotionEffect(new EffectInstance(Effects.SPEED, 150, 0))));
+	public static final RegistryObject<Block> COLD_CAKE = BLOCKS.register("cold_cake", () -> new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.3F, player -> {player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 200, 1));player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 1));}));
+	public static final RegistryObject<Block> RED_CAKE = BLOCKS.register("red_cake", () -> new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.1F, player -> player.heal(1)));
+	public static final RegistryObject<Block> HOT_CAKE = BLOCKS.register("hot_cake", () -> new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.1F, player -> player.setFire(4)));
+	public static final RegistryObject<Block> REVERSE_CAKE = BLOCKS.register("reverse_cake", () -> new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.1F, null));
+	public static final RegistryObject<Block> FUCHSIA_CAKE = BLOCKS.register("fuchsia_cake", () -> new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 3, 0.5F, player -> {player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 350, 1));player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200, 0));}));
 	
 	//Explosion and Redstone
-	public static final Block PRIMED_TNT = getNull();
-	public static final Block UNSTABLE_TNT = getNull();
-	public static final Block INSTANT_TNT = getNull();
-	public static final Block WOODEN_EXPLOSIVE_BUTTON = getNull();
-	public static final Block STONE_EXPLOSIVE_BUTTON = getNull();
+	public static final RegistryObject<Block> PRIMED_TNT = BLOCKS.register("primed_tnt", () -> new SpecialTNTBlock(Block.Properties.create(Material.TNT).hardnessAndResistance(0.0F).sound(SoundType.PLANT), true, false, false));
+	public static final RegistryObject<Block> UNSTABLE_TNT = BLOCKS.register("unstable_tnt", () -> new SpecialTNTBlock(Block.Properties.create(Material.TNT).hardnessAndResistance(0.0F).sound(SoundType.PLANT).tickRandomly(), false, true, false));
+	public static final RegistryObject<Block> INSTANT_TNT = BLOCKS.register("instant_tnt", () -> new SpecialTNTBlock(Block.Properties.create(Material.TNT).hardnessAndResistance(0.0F).sound(SoundType.PLANT), false, false, true));
+	public static final RegistryObject<Block> WOODEN_EXPLOSIVE_BUTTON = BLOCKS.register("wooden_explosive_button", () -> new SpecialButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD), true, true));
+	public static final RegistryObject<Block> STONE_EXPLOSIVE_BUTTON = BLOCKS.register("stone_explosive_button", () -> new SpecialButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.STONE), true, false));
 	
 	//Misc Alchemy Objects
-	public static final Block BLENDER = getNull();
-	public static final Block CHESSBOARD = getNull();
-	public static final Block MINI_FROG_STATUE = getNull();
-	public static final Block GLOWYSTONE_DUST = getNull();
+	public static final RegistryObject<Block> BLENDER = BLOCKS.register("blender", () -> new DecorBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(0.5F).sound(SoundType.METAL), DecorBlockShapes.BLENDER_SHAPE));
+	public static final RegistryObject<Block> CHESSBOARD = BLOCKS.register("chessboard", () -> new DecorBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.5F), DecorBlockShapes.CHESSBOARD_SHAPE));
+	public static final RegistryObject<Block> MINI_FROG_STATUE = BLOCKS.register("mini_frog_statue", () -> new DecorBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.5F), DecorBlockShapes.FROG_STATUE_SHAPE));
+	public static final RegistryObject<Block> GLOWYSTONE_DUST = BLOCKS.register("glowystone_dust", () -> new GlowystoneWireBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).lightValue(16).doesNotBlockMovement()));
 	
-	public static final FlowingFluidBlock OIL = getNull(), BLOOD = getNull(), BRAIN_JUICE = getNull();
-	public static final FlowingFluidBlock WATER_COLORS = getNull(), ENDER = getNull(), LIGHT_WATER = getNull();
-	//TODO Look more into fluids
-	/*public static Fluid fluidOil = createFluid("oil", new ResourceLocation("minestuck", "blocks/oil_still"), new ResourceLocation("minestuck", "blocks/oil_flowing"), "tile.oil");
-	public static Fluid fluidBlood = createFluid("blood", new ResourceLocation("minestuck", "blocks/blood_still"), new ResourceLocation("minestuck", "blocks/blood_flowing"), "tile.blood");
-	public static Fluid fluidBrainJuice = createFluid("brain_juice", new ResourceLocation("minestuck", "blocks/brain_juice_still"), new ResourceLocation("minestuck", "blocks/brain_juice_flowing"), "tile.brainJuice");
-	public static Fluid fluidWatercolors = createFluid("watercolors", new ResourceLocation("minestuck", "blocks/watercolors_still"), new ResourceLocation("minestuck", "blocks/watercolors_flowing"), "tile.watercolors");
-	public static Fluid fluidEnder = createFluid("ender", new ResourceLocation("minestuck", "blocks/ender_still"), new ResourceLocation("minestuck", "blocks/ender_flowing"), "tile.ender");
-	public static Fluid fluidLightWater = createFluid("light_water", new ResourceLocation("minestuck", "blocks/light_water_still"), new ResourceLocation("minestuck", "blocks/light_water_flowing"), "tile.lightWater");
-	
-	public static Block blockOil = new BlockFluidClassic(fluidOil, Material.WATER){
-		@SideOnly (Side.CLIENT)
-		@Override
-		public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
-		{
-			return new Vec3d(0.0, 0.0, 0.0);
-		}
-	}.setUnlocalizedName("oil").setLightOpacity(2);
-	
-	public static Block blockBlood = new BlockFluidClassic(fluidBlood, Material.WATER){
-		@SideOnly (Side.CLIENT)
-		@Override
-		public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
-		{
-			return new Vec3d(0.8, 0.0, 0.0);
-		}
-	}.setUnlocalizedName("blood").setLightOpacity(1);
-	
-	public static Block blockBrainJuice = new BlockFluidClassic(fluidBrainJuice, Material.WATER){
-		@SideOnly (Side.CLIENT)
-		@Override
-		public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
-		{
-			return new Vec3d(0.55, 0.25, 0.7);
-		}
-	}.setUnlocalizedName("brainJuice").setLightOpacity(1);
-	
-	public static Block blockWatercolors = new BlockFluidClassic(fluidWatercolors, Material.WATER){
-		@SideOnly (Side.CLIENT)
-		@Override
-		public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
-		{
-			Vec3d newColor = new Vec3d(0.0, 20.0, 30.0);
-			newColor = newColor.rotateYaw((float) (entity.posX / 2.0));
-			newColor = newColor.rotatePitch((float) (entity.posZ / 2.0));
-			newColor = newColor.rotateYaw((float) (entity.posY));
-			newColor = newColor.normalize();
-			newColor = new Vec3d(newColor.x % 1.0, newColor.y % 1.0, newColor.z % 1.0);
-			
-			return newColor;
-		}
-	}.setUnlocalizedName("watercolors").setLightOpacity(1);
-	
-	public static Block blockEnder = new BlockFluidEnder(fluidEnder, Material.WATER).setUnlocalizedName("ender").setLightOpacity(1);
-	
-	public static Block blockLightWater = new BlockFluidClassic(fluidLightWater, Material.WATER){
-		@SideOnly (Side.CLIENT)
-		@Override
-		public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
-		{
-			return new Vec3d(0.2, 0.3, 1.0);
-		}
-	}.setUnlocalizedName("lightWater").setLightOpacity(1);
-	
-	public static Block[] liquidGrists;
-	public static Fluid[] gristFluids;*/
-	
-	
-	@Nonnull
-	@SuppressWarnings("ConstantConditions")
-	private static <T> T getNull()
-	{
-		return null;
-	}
-	
-	public static void registerBlocks(IForgeRegistry<Block> registry)
-	{
-		
-		registry.register(new Block(Block.Properties.create(Material.EARTH, MaterialColor.BLACK).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)).setRegistryName("black_chess_dirt"));
-		registry.register(new Block(Block.Properties.create(Material.EARTH, MaterialColor.SNOW).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)).setRegistryName("white_chess_dirt"));
-		registry.register(new Block(Block.Properties.create(Material.EARTH, MaterialColor.GRAY).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)).setRegistryName("dark_gray_chess_dirt"));
-		registry.register(new Block(Block.Properties.create(Material.EARTH, MaterialColor.LIGHT_GRAY).hardnessAndResistance(0.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)).setRegistryName("light_gray_chess_dirt"));
-		registry.register(new SkaiaPortalBlock(Block.Properties.create(Material.PORTAL, MaterialColor.CYAN).doesNotBlockMovement().lightValue(11).hardnessAndResistance(-1.0F, 3600000.0F)).setRegistryName("skaia_portal"));
-		
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("stone_cruxite_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("netherrack_cruxite_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("cobblestone_cruxite_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("sandstone_cruxite_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("red_sandstone_cruxite_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("end_stone_cruxite_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("pink_stone_cruxite_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)).setRegistryName("stone_uranium_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)).setRegistryName("netherrack_uranium_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)).setRegistryName("cobblestone_uranium_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)).setRegistryName("sandstone_uranium_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)).setRegistryName("red_sandstone_uranium_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)).setRegistryName("end_stone_uranium_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).lightValue(3)).setRegistryName("pink_stone_uranium_ore"));
-		registry.register(new CustomOreBlock(0, 2, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("netherrack_coal_ore"));
-		registry.register(new CustomOreBlock(0, 2, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("pink_stone_coal_ore"));
-		registry.register(new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)).setRegistryName("end_stone_iron_ore"));
-		registry.register(new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)).setRegistryName("sandstone_iron_ore"));
-		registry.register(new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)).setRegistryName("red_sandstone_iron_ore"));
-		registry.register(new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)).setRegistryName("sandstone_gold_ore"));
-		registry.register(new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)).setRegistryName("red_sandstone_gold_ore"));
-		registry.register(new CustomOreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)).setRegistryName("pink_stone_gold_ore"));
-		registry.register(new CustomOreBlock(1, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)).setRegistryName("end_stone_redstone_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("stone_quartz_ore"));
-		registry.register(new CustomOreBlock(2, 5, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1)).setRegistryName("pink_stone_lapis_ore"));
-		registry.register(new CustomOreBlock(3, 7, Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2)).setRegistryName("pink_stone_diamond_ore"));
-		
-		registry.register(new Block(Block.Properties.create(Material.ROCK, DyeColor.LIGHT_BLUE).hardnessAndResistance(3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("cruxite_block"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, DyeColor.LIME).hardnessAndResistance(3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0).lightValue(7)).setRegistryName("uranium_block"));
-		registry.register(new Block(Block.Properties.create(Material.GOURD, DyeColor.LIME).hardnessAndResistance(1.0F).sound(SoundType.WOOD)).setRegistryName("generic_object"));
-		
-		registry.register(new Block(Block.Properties.create(Material.EARTH, MaterialColor.BLUE).hardnessAndResistance(0.5F).lightValue(11).sound(SoundType.GROUND)).setRegistryName("blue_dirt"));
-		registry.register(new Block(Block.Properties.create(Material.EARTH, MaterialColor.LIME).hardnessAndResistance(0.5F).lightValue(11).sound(SoundType.GROUND)).setRegistryName("thought_dirt"));
-		Block coarseStone = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("coarse_stone"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("chiseled_coarse_stone"));
-		Block shadeBricks = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLUE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("shade_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLUE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("smooth_shade_stone"));
-		Block frostBricks = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("frost_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("frost_tile"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("chiseled_frost_bricks"));
-		Block castIron = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.IRON).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("cast_iron"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.IRON).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("chiseled_cast_iron"));
-		Block myceliumBricks = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.MAGENTA).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("mycelium_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(2.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("black_stone"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("flowery_mossy_cobblestone"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("flowery_mossy_stone_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.SAND).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("coarse_end_stone"));
-		registry.register(new EndGrassBlock(Block.Properties.create(Material.ROCK, MaterialColor.PURPLE).hardnessAndResistance(3.0F, 9.0F).harvestTool(ToolType.SHOVEL).tickRandomly()).setRegistryName("end_grass"));
-		Block chalk = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("chalk"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("polished_chalk"));
-		Block chalkBricks = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("chalk_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.SNOW).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("chiseled_chalk_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("pink_stone"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("polished_pink_stone"));
-		Block pinkStoneBricks = register(registry, new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("pink_stone_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("chiseled_pink_stone_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("cracked_pink_stone_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)).setRegistryName("mossy_pink_stone_bricks"));
-		registry.register(new Block(Block.Properties.create(Material.GLASS, MaterialColor.YELLOW).hardnessAndResistance(0.5F).sound(SoundType.SNOW)).setRegistryName("dense_cloud"));
-		registry.register(new Block(Block.Properties.create(Material.GLASS, MaterialColor.LIGHT_GRAY).hardnessAndResistance(0.5F).sound(SoundType.SNOW)).setRegistryName("bright_dense_cloud"));
-		registry.register(new Block(Block.Properties.create(Material.SAND, MaterialColor.SNOW).hardnessAndResistance(0.4F).sound(SoundType.SAND)).setRegistryName("sugar_cube"));
-		
-		registry.register(new FlammableLogBlock(MaterialColor.LIGHT_BLUE, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).lightValue(11).sound(SoundType.WOOD)).setRegistryName("glowing_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.ICE, Block.Properties.create(Material.WOOD, MaterialColor.ICE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("frost_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("rainbow_log"));
-		registry.register(new DoubleLogBlock(MaterialColor.SAND, 1, 250, Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("end_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("vine_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("flowery_vine_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("dead_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, 0, 0, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.STONE)).setRegistryName("petrified_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.LIGHT_BLUE, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).lightValue(11).sound(SoundType.WOOD)).setRegistryName("glowing_wood"));
-		registry.register(new FlammableLogBlock(MaterialColor.ICE, Block.Properties.create(Material.WOOD, MaterialColor.ICE).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("frost_wood"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("rainbow_wood"));
-		registry.register(new FlammableLogBlock(MaterialColor.SAND, 1, 250, Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("end_wood"));
-		registry.register(new FlammableLogBlock(MaterialColor.OBSIDIAN, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("vine_wood"));
-		registry.register(new FlammableLogBlock(MaterialColor.OBSIDIAN, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("flowery_vine_wood"));
-		registry.register(new FlammableLogBlock(MaterialColor.OBSIDIAN, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("dead_wood"));
-		registry.register(new FlammableLogBlock(MaterialColor.OBSIDIAN, 0, 0, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.STONE)).setRegistryName("petrified_wood"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).lightValue(7).sound(SoundType.WOOD)).setRegistryName("glowing_planks"));
-		registry.register(new FlammableBlock(5, 5, Block.Properties.create(Material.WOOD, MaterialColor.ICE).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("frost_planks"));
-		Block rainbowPlanks = register(registry, new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("rainbow_planks"));
-		Block endPlanks = register(registry, new FlammableBlock(1, 250, Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("end_planks"));
-		Block deadPlanks = register(registry, new FlammableBlock(5, 5, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("dead_planks"));
-		Block treatedPlanks = register(registry, new FlammableBlock(1, 0, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("treated_planks"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("frost_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("rainbow_leaves"));
-		registry.register(new EndLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("end_leaves"));
-		registry.register(new RainbowSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("rainbow_sapling"));
-		registry.register(new EndSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("end_sapling"));
-		
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("blood_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("breath_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("doom_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("heart_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("hope_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("life_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("light_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("mind_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("rage_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("space_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("time_aspect_log"));
-		registry.register(new FlammableLogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("void_aspect_log"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("blood_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("breath_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("doom_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("heart_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("hope_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("life_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("light_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("mind_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("rage_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("space_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("time_aspect_planks"));
-		registry.register(new FlammableBlock(5, 20, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)).setRegistryName("void_aspect_planks"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("blood_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("breath_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("doom_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("heart_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("hope_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock( Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("life_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("light_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("mind_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("rage_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("space_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("time_aspect_leaves"));
-		registry.register(new FlammableLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)).setRegistryName("void_aspect_leaves"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("blood_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("breath_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("doom_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("heart_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("hope_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("life_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("light_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("mind_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("rage_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("space_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("time_aspect_sapling"));
-		registry.register(new AspectSaplingBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("void_aspect_sapling"));
-		
-		registry.register(new GlowingMushroomBlock(Block.Properties.create(Material.PLANTS, MaterialColor.DIAMOND).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT).lightValue(11)).setRegistryName("glowing_mushroom"));
-		registry.register(new DesertFloraBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("desert_bush"));
-		registry.register(new DesertFloraBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT)).setRegistryName("blooming_cactus"));
-		registry.register(new PetrifiedFloraBlock(Block.Properties.create(Material.ROCK, DyeColor.GRAY).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.STONE)).setRegistryName("petrified_grass"));
-		registry.register(new PetrifiedFloraBlock(Block.Properties.create(Material.ROCK, DyeColor.GRAY).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.STONE)).setRegistryName("petrified_poppy"));
-		registry.register(new StrawberryBlock(Block.Properties.create(Material.GOURD, MaterialColor.RED).hardnessAndResistance(1.0F).sound(SoundType.WOOD)).setRegistryName("strawberry"));
-		registry.register(new StrawberryBlock.AttachedStem((StemGrownBlock) STRAWBERRY, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.WOOD)).setRegistryName("attached_strawberry_stem"));
-		registry.register(new StrawberryBlock.Stem((StemGrownBlock) STRAWBERRY, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.WOOD)).setRegistryName("strawberry_stem"));
-		
-		registry.register(new LayeredBlock(Block.Properties.from(Blocks.SAND)).setRegistryName("layered_sand"));
-		registry.register(new LayeredBlock(Block.Properties.from(Blocks.RED_SAND)).setRegistryName("layered_red_sand"));
-		registry.register(new GoopBlock(Block.Properties.create(Material.CLAY).hardnessAndResistance(0.1F).sound(SoundType.SLIME).lightValue(14)).setRegistryName("glowy_goop"));
-		registry.register(new GoopBlock(Block.Properties.create(Material.CLAY).hardnessAndResistance(0.1F).sound(SoundType.SLIME)).setRegistryName("coagulated_blood"));
-		registry.register(new VeinBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.45F).sound(SoundType.SLIME)).setRegistryName("vein"));
-		registry.register(new VeinCornerBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.45F).sound(SoundType.SLIME)).setRegistryName("vein_corner"));
-		registry.register(new VeinCornerBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.45F).sound(SoundType.SLIME)).setRegistryName("vein_corner_inverted"));
-		
-		registry.register(new ModStairsBlock(coarseStone.getDefaultState(), Block.Properties.from(coarseStone)).setRegistryName("coarse_stone_stairs"));
-		registry.register(new ModStairsBlock(shadeBricks.getDefaultState(), Block.Properties.from(shadeBricks)).setRegistryName("shade_brick_stairs"));
-		registry.register(new ModStairsBlock(frostBricks.getDefaultState(), Block.Properties.from(frostBricks)).setRegistryName("frost_brick_stairs"));
-		registry.register(new ModStairsBlock(castIron.getDefaultState(), Block.Properties.from(castIron)).setRegistryName("cast_iron_stairs"));
-		registry.register(new ModStairsBlock(myceliumBricks.getDefaultState(), Block.Properties.from(myceliumBricks)).setRegistryName("mycelium_brick_stairs"));
-		registry.register(new ModStairsBlock(chalk.getDefaultState(), Block.Properties.from(chalk)).setRegistryName("chalk_stairs"));
-		registry.register(new ModStairsBlock(chalkBricks.getDefaultState(), Block.Properties.from(chalkBricks)).setRegistryName("chalk_brick_stairs"));
-		registry.register(new ModStairsBlock(pinkStoneBricks.getDefaultState(), Block.Properties.from(pinkStoneBricks)).setRegistryName("pink_stone_brick_stairs"));
-		registry.register(new ModStairsBlock(rainbowPlanks.getDefaultState(), Block.Properties.from(rainbowPlanks)).setRegistryName("rainbow_planks_stairs"));
-		registry.register(new ModStairsBlock(endPlanks.getDefaultState(), Block.Properties.from(endPlanks)).setRegistryName("end_planks_stairs"));
-		registry.register(new ModStairsBlock(deadPlanks.getDefaultState(), Block.Properties.from(deadPlanks)).setRegistryName("dead_planks_stairs"));
-		registry.register(new ModStairsBlock(treatedPlanks.getDefaultState(), Block.Properties.from(treatedPlanks)).setRegistryName("treated_planks_stairs"));
-		registry.register(new SlabBlock(Block.Properties.from(chalk)).setRegistryName("chalk_slab"));
-		registry.register(new SlabBlock(Block.Properties.from(chalkBricks)).setRegistryName("chalk_brick_slab"));
-		registry.register(new SlabBlock(Block.Properties.from(pinkStoneBricks)).setRegistryName("pink_stone_brick_slab"));
-		registry.register(new SlabBlock(Block.Properties.from(rainbowPlanks)).setRegistryName("rainbow_planks_slab"));
-		registry.register(new SlabBlock(Block.Properties.from(endPlanks)).setRegistryName("end_planks_slab"));
-		registry.register(new SlabBlock(Block.Properties.from(deadPlanks)).setRegistryName("dead_planks_slab"));
-		registry.register(new SlabBlock(Block.Properties.from(treatedPlanks)).setRegistryName("treated_planks_slab"));
-		
-		registry.register(new GateBlock(Block.Properties.create(Material.PORTAL).doesNotBlockMovement().hardnessAndResistance(-1.0F, 25.0F).sound(SoundType.GLASS).lightValue(11)).setRegistryName("gate"));
-		registry.register(new ReturnNodeBlock(Block.Properties.create(Material.PORTAL).doesNotBlockMovement().hardnessAndResistance(-1.0F, 10.0F).sound(SoundType.GLASS).lightValue(11)).setRegistryName("return_node"));
-		
-		registry.register(new MobSpawnerBlock(Block.Properties.create(Material.AIR).tickRandomly().doesNotBlockMovement()).setRegistryName("rabbit_spawner"));
-		
-		CRUXTRUDER = new CruxtruderMultiblock();
-		CRUXTRUDER.registerBlocks(registry);
-		registry.register(new CruxtruderLidBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.0F)).setRegistryName("cruxtruder_lid"));
-		TOTEM_LATHE = new TotemLatheMultiblock();
-		TOTEM_LATHE.registerBlocks(registry);
-		ALCHEMITER = new AlchemiterMultiblock();
-		ALCHEMITER.registerBlocks(registry);
-		PUNCH_DESIGNIX = new PunchDesignixMultiblock();
-		PUNCH_DESIGNIX.registerBlocks(registry);
-		registry.register(new MiniCruxtruderBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)).setRegistryName("mini_cruxtruder"));
-		registry.register(new MiniTotemLatheBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)).setRegistryName("mini_totem_lathe"));
-		registry.register(new MiniAlchemiterBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)).setRegistryName("mini_alchemiter"));
-		registry.register(new MiniPunchDesignixBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)).setRegistryName("mini_punch_designix"));
-		/*
-		registry.register(new BlockHolopad(Block.Properties.create(Material.IRON, MaterialColor.SNOW).hardnessAndResistance(3.0F)).setRegistryName("holopad"));
-		registry.register(jumperBlockExtension[0].setRegistryName("jumper_block_extension"));
-		registry.register(jumperBlockExtension[1].setRegistryName("jumper_block_extension2"));
-		registry.register(jumperBlockExtension[2].setRegistryName("jumper_block_extension3"));
-		registry.register(jumperBlockExtension[3].setRegistryName("jumper_block_extension4"));
-		
-		registry.register(alchemiterUpgrades[0].setRegistryName("alchemiter_upgrade"));
-		registry.register(alchemiterUpgrades[1].setRegistryName("alchemiter_upgrade2"));
-		registry.register(alchemiterUpgrades[2].setRegistryName("alchemiter_upgrade3"));
-		registry.register(alchemiterUpgrades[3].setRegistryName("alchemiter_upgrade4"));
-		*/
-		
-		registry.register(new ComputerOnBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), ComputerOffBlock.COMPUTER_SHAPE, ComputerOffBlock.COMPUTER_COLLISION_SHAPE, () -> COMPUTER_OFF.asItem()).setRegistryName("computer_on"));
-		registry.register(new ComputerOffBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), COMPUTER_ON, ComputerOffBlock.COMPUTER_SHAPE, ComputerOffBlock.COMPUTER_COLLISION_SHAPE).setRegistryName("computer_off"));
-		registry.register(new ComputerOnBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE, () -> LAPTOP_OFF.asItem()).setRegistryName("laptop_on"));
-		registry.register(new ComputerOffBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(4.0F), LAPTOP_ON, ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE).setRegistryName("laptop_off"));
-		registry.register(new ComputerOnBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE, () -> CROCKERTOP_OFF.asItem()).setRegistryName("crockertop_on"));
-		registry.register(new ComputerOffBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), CROCKERTOP_ON, ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE).setRegistryName("crockertop_off"));
-		registry.register(new ComputerOnBlock(Block.Properties.create(Material.IRON, MaterialColor.GREEN).hardnessAndResistance(4.0F), ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE, () -> HUBTOP_OFF.asItem()).setRegistryName("hubtop_on"));
-		registry.register(new ComputerOffBlock(Block.Properties.create(Material.IRON, MaterialColor.GREEN).hardnessAndResistance(4.0F), HUBTOP_ON, ComputerOffBlock.LAPTOP_SHAPE, ComputerOffBlock.LAPTOP_COLLISION_SHAPE).setRegistryName("hubtop_off"));
-		registry.register(new ComputerOnBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), ComputerOffBlock.LUNCHTOP_SHAPE, ComputerOffBlock.LUNCHTOP_SHAPE, () -> LUNCHTOP_OFF.asItem()).setRegistryName("lunchtop_on"));
-		registry.register(new ComputerOffBlock(Block.Properties.create(Material.IRON, MaterialColor.RED).hardnessAndResistance(4.0F), LUNCHTOP_ON, ComputerOffBlock.LUNCHTOP_SHAPE, ComputerOffBlock.LUNCHTOP_SHAPE).setRegistryName("lunchtop_off"));
-		registry.register(new TransportalizerBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)).setRegistryName("transportalizer"));
-		registry.register(new GristWidgetBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)).setRegistryName("grist_widget"));
-		registry.register(new UraniumCookerBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0F)).setRegistryName("uranium_cooker"));
-		
-		registry.register(new CruxiteDowelBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.0F)).setRegistryName("cruxite_dowel"));
-		
-		registry.register(new GoldSeedsBlock(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.METAL).doesNotBlockMovement()).setRegistryName("gold_seeds"));
-		registry.register(new SpecialCactusBlock(Block.Properties.create(Material.WOOD).tickRandomly().hardnessAndResistance(1.0F, 2.5F).sound(SoundType.WOOD), ToolType.AXE).setRegistryName("wooden_cactus"));
-		
-		registry.register(new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.5F, null).setRegistryName("apple_cake"));
-		registry.register(new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.3F, player -> player.addPotionEffect(new EffectInstance(Effects.SPEED, 150, 0))).setRegistryName("blue_cake"));
-		registry.register(new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.3F, player -> {player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 200, 1));player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 1));}).setRegistryName("cold_cake"));
-		registry.register(new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.1F, player -> player.heal(1)).setRegistryName("red_cake"));
-		registry.register(new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.1F, player -> player.setFire(4)).setRegistryName("hot_cake"));
-		registry.register(new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 2, 0.1F, null).setRegistryName("reverse_cake"));
-		registry.register(new SimpleCakeBlock(Block.Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), 3, 0.5F, player -> {player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 350, 1));player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200, 0));}).setRegistryName("fuchsia_cake"));
-		
-		registry.register(new SpecialTNTBlock(Block.Properties.create(Material.TNT).hardnessAndResistance(0.0F).sound(SoundType.PLANT), true, false, false).setRegistryName("primed_tnt"));
-		registry.register(new SpecialTNTBlock(Block.Properties.create(Material.TNT).hardnessAndResistance(0.0F).sound(SoundType.PLANT).tickRandomly(), false, true, false).setRegistryName("unstable_tnt"));
-		registry.register(new SpecialTNTBlock(Block.Properties.create(Material.TNT).hardnessAndResistance(0.0F).sound(SoundType.PLANT), false, false, true).setRegistryName("instant_tnt"));
-		registry.register(new SpecialButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD), true, true).setRegistryName("wooden_explosive_button"));
-		registry.register(new SpecialButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.STONE), true, false).setRegistryName("stone_explosive_button"));
-		
-		registry.register(new DecorBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(0.5F).sound(SoundType.METAL), DecorBlockShapes.BLENDER_SHAPE).setRegistryName("blender"));
-		registry.register(new DecorBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.5F), DecorBlockShapes.CHESSBOARD_SHAPE).setRegistryName("chessboard"));
-		registry.register(new DecorBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.5F), DecorBlockShapes.FROG_STATUE_SHAPE).setRegistryName("mini_frog_statue"));
-		registry.register(new GlowystoneWireBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).lightValue(16).doesNotBlockMovement()).setRegistryName("glowystone_dust"));
-		
-		registry.register(new FlowingModFluidBlock(MSFluids.OIL, new Vec3d(0.0, 0.0, 0.0), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()).setRegistryName("oil"));
-		registry.register(new FlowingModFluidBlock(MSFluids.BLOOD, new Vec3d(0.8, 0.0, 0.0), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()).setRegistryName("blood"));
-		registry.register(new FlowingModFluidBlock(MSFluids.BRAIN_JUICE, new Vec3d(0.55, 0.25, 0.7), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()).setRegistryName("brain_juice"));
-		registry.register(new FlowingWaterColorsBlock(MSFluids.WATER_COLORS, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()).setRegistryName("water_colors"));
-		registry.register(new FlowingModFluidBlock(MSFluids.ENDER, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()).setRegistryName("ender"));
-		registry.register(new FlowingModFluidBlock(MSFluids.LIGHT_WATER, new Vec3d(0.2, 0.3, 1.0), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()).setRegistryName("light_water"));
-	}
-	
-	private static Block register(IForgeRegistry<Block> registry, Block block) //Used because registry.register doesn't return the registered block
-	{
-		registry.register(block);
-		return block;
-	}
+	public static final RegistryObject<FlowingFluidBlock> OIL = BLOCKS.register("oil", () -> new FlowingModFluidBlock(MSFluids.OIL, new Vec3d(0.0, 0.0, 0.0), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
+	public static final RegistryObject<FlowingFluidBlock> LIGHT_WATER = BLOCKS.register("light_water", () -> new FlowingModFluidBlock(MSFluids.LIGHT_WATER, new Vec3d(0.2, 0.3, 1.0), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
+	public static final RegistryObject<FlowingFluidBlock> BLOOD = BLOCKS.register("blood", () -> new FlowingModFluidBlock(MSFluids.BLOOD, new Vec3d(0.8, 0.0, 0.0), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
+	public static final RegistryObject<FlowingFluidBlock> BRAIN_JUICE = BLOCKS.register("brain_juice", () -> new FlowingModFluidBlock(MSFluids.BRAIN_JUICE, new Vec3d(0.55, 0.25, 0.7), Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
+	public static final RegistryObject<FlowingFluidBlock> WATER_COLORS = BLOCKS.register("water_colors", () -> new FlowingWaterColorsBlock(MSFluids.WATER_COLORS, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
+	public static final RegistryObject<FlowingFluidBlock> ENDER = BLOCKS.register("ender", () -> new FlowingModFluidBlock(MSFluids.ENDER, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
 }

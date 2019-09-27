@@ -60,7 +60,7 @@ public class HolopadTileEntity extends TileEntity
 				{
 					setCard(heldStack.split(1));    //Insert card into the card slot
 					ItemStack in = getCard();
-					ItemStack item = new ItemStack(MSBlocks.GENERIC_OBJECT);
+					ItemStack item = new ItemStack(MSBlocks.GENERIC_OBJECT.get());
 					
 					if (in.hasTag() && in.getTag().contains("contentID"))
 						item = AlchemyRecipes.getDecodedItem(in);

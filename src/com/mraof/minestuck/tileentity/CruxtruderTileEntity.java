@@ -66,7 +66,7 @@ public class CruxtruderTileEntity extends TileEntity
 				}
 			} else if(!top)
 			{
-				if(state.getBlock() == MSBlocks.CRUXITE_DOWEL)
+				if(state.getBlock() == MSBlocks.CRUXITE_DOWEL.get())
 				{
 					CruxiteDowelBlock.dropDowel(getWorld(), pos);
 				} else if(state.isAir(getWorld(), pos))
@@ -76,7 +76,7 @@ public class CruxtruderTileEntity extends TileEntity
 						world.playEvent(1001, pos, 0);
 					} else
 					{
-						world.setBlockState(pos, MSBlocks.CRUXITE_DOWEL.getDefaultState().with(CruxiteDowelBlock.DOWEL_TYPE, CruxiteDowelBlock.Type.CRUXTRUDER));
+						world.setBlockState(pos, MSBlocks.CRUXITE_DOWEL.get().getDefaultState().with(CruxiteDowelBlock.DOWEL_TYPE, CruxiteDowelBlock.Type.CRUXTRUDER));
 						TileEntity te = world.getTileEntity(pos);
 						if(te instanceof ItemStackTileEntity)
 							ColorCollector.setColor(((ItemStackTileEntity) te).getStack(), color + 1);

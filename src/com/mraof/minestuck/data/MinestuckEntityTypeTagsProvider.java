@@ -8,7 +8,7 @@ import static com.mraof.minestuck.util.MSTags.EntityTypes.*;
 
 public class MinestuckEntityTypeTagsProvider extends EntityTypeTagsProvider
 {
-	public MinestuckEntityTypeTagsProvider(DataGenerator generator)
+	MinestuckEntityTypeTagsProvider(DataGenerator generator)
 	{
 		super(generator);
 	}

@@ -29,7 +29,7 @@ public class GateTileEntity extends TileEntity
 	
 	public void teleportEntity(World world, ServerPlayerEntity player, Block block)
 	{
-		if(block == MSBlocks.RETURN_NODE)
+		if(block == MSBlocks.RETURN_NODE.get())
 		{
 			BlockPos pos = world.getSpawnPoint();
 			PositionTeleporter.moveEntity(player, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
@@ -96,7 +96,7 @@ public class GateTileEntity extends TileEntity
 	
 	public boolean isGate()
 	{
-		return this.world != null ? this.world.getBlockState(this.getPos()).getBlock() != MSBlocks.RETURN_NODE : this.gateCount != 0;
+		return this.world != null ? this.world.getBlockState(this.getPos()).getBlock() != MSBlocks.RETURN_NODE.get() : this.gateCount != 0;
 	}
 	
 	@Override

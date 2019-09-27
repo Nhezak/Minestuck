@@ -17,7 +17,7 @@ public class SurfaceMushroomGenerator extends BiomeSpecificDecorator
 {
 	private int tries;
 	private int count;
-	private Block block = MSBlocks.GLOWING_MUSHROOM;
+	private Block block = MSBlocks.GLOWING_MUSHROOM.get();
 	private boolean lightOverride = true;
 	
 	public SurfaceMushroomGenerator(int tries, int count, Biome... biomes)

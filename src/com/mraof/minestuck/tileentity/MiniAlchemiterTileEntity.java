@@ -69,7 +69,7 @@ public class MiniAlchemiterTileEntity extends MachineProcessTileEntity implement
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return index == 0 && stack.getItem() == MSBlocks.CRUXITE_DOWEL.asItem();
+		return index == 0 && stack.getItem() == MSBlocks.CRUXITE_DOWEL.get().asItem();
 	}
 	
 	@Override
@@ -81,7 +81,7 @@ public class MiniAlchemiterTileEntity extends MachineProcessTileEntity implement
 			ItemStack newItem = AlchemyRecipes.getDecodedItem(this.inv.get(INPUT));
 			if(newItem.isEmpty())
 				if(!inv.get(INPUT).hasTag() || !inv.get(INPUT).getTag().contains("contentID"))
-					newItem = new ItemStack(MSBlocks.GENERIC_OBJECT);
+					newItem = new ItemStack(MSBlocks.GENERIC_OBJECT.get());
 				else return false;
 			if(!inv.get(OUTPUT).isEmpty() && (inv.get(OUTPUT).getItem() != newItem.getItem() || inv.get(OUTPUT).getMaxStackSize() <= inv.get(OUTPUT).getCount()))
 			{
@@ -103,7 +103,7 @@ public class MiniAlchemiterTileEntity extends MachineProcessTileEntity implement
 		ItemStack newItem = AlchemyRecipes.getDecodedItem(this.inv.get(INPUT));
 		
 		if (newItem.isEmpty())
-			newItem = new ItemStack(MSBlocks.GENERIC_OBJECT);
+			newItem = new ItemStack(MSBlocks.GENERIC_OBJECT.get());
 		
 		if (inv.get(OUTPUT).isEmpty())
 		{
@@ -186,7 +186,7 @@ public class MiniAlchemiterTileEntity extends MachineProcessTileEntity implement
 			ItemStack newItem = AlchemyRecipes.getDecodedItem(getStackInSlot(INPUT));
 			if (newItem.isEmpty())
 				if (!getStackInSlot(INPUT).hasTag() || !getStackInSlot(INPUT).getTag().contains("contentID"))
-					newItem = new ItemStack(MSBlocks.GENERIC_OBJECT);
+					newItem = new ItemStack(MSBlocks.GENERIC_OBJECT.get());
 				else return 0;
 			if (!getStackInSlot(OUTPUT).isEmpty() && (getStackInSlot(OUTPUT).getItem() != newItem.getItem() || getStackInSlot(OUTPUT).getMaxStackSize() <= getStackInSlot(OUTPUT).getCount()))
 			{

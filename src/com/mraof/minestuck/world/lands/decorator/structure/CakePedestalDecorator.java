@@ -53,7 +53,7 @@ public class CakePedestalDecorator extends SimpleStructureDecorator
 		placeBlock(world, stairsS, 1, 0, -1);
 		placeBlock(world, stairsW, 1, 0, -2);
 		
-		BlockState cake = MSBlocks.FUCHSIA_CAKE.getDefaultState();
+		BlockState cake = MSBlocks.FUCHSIA_CAKE.get().getDefaultState();
 		
 		placeBlock(world, cake, 0, 2, 0);
 		

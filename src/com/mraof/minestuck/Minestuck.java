@@ -66,6 +66,8 @@ public class Minestuck
 		
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
+		MSBlocks.BLOCKS.register(eventBus);
+		
 		MSFluids.FLUIDS.register(eventBus);
 	}
 	
@@ -148,12 +150,6 @@ public class Minestuck
 	@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents
 	{
-		@SubscribeEvent
-		public static void onBlockRegistry(final RegistryEvent.Register<Block> event)
-		{
-			MSBlocks.registerBlocks(event.getRegistry());
-		}
-		
 		@SubscribeEvent
 		public static void onItemRegistry(final RegistryEvent.Register<Item> event)
 		{

@@ -8,6 +8,7 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
 
@@ -40,20 +41,21 @@ public class StrawberryBlock extends StemGrownBlock
 	@Override
 	public StemBlock getStem()
 	{
-		return (StemBlock) MSBlocks.STRAWBERRY_STEM;
+		return MSBlocks.STRAWBERRY_STEM.orElseThrow(() -> new IllegalStateException("Should not get stem block before it is created!"));
 	}
 	
 	@Override
 	public AttachedStemBlock getAttachedStem()
 	{
-		return (AttachedStemBlock) MSBlocks.ATTACHED_STRAWBERRY_STEM;
+		return MSBlocks.ATTACHED_STRAWBERRY_STEM.orElseThrow(() -> new IllegalStateException("Should not get attached stem block before it is created!"));
 	}
 	
+	//TODO These need to handle suppliers for the crop block
 	public static class AttachedStem extends AttachedStemBlock
 	{
-		public AttachedStem(StemGrownBlock crop, Properties properties)
+		public AttachedStem(RegistryObject<StemGrownBlock> crop, Properties properties)
 		{
-			super(crop, properties);
+			super(crop.orElseThrow(() -> new IllegalStateException("Shouldn't create crop stem before the crop is created!")), properties);
 		}
 		
 		@Override
@@ -65,9 +67,9 @@ public class StrawberryBlock extends StemGrownBlock
 	
 	public static class Stem extends StemBlock
 	{
-		public Stem(StemGrownBlock crop, Properties properties)
+		public Stem(RegistryObject<StemGrownBlock> crop, Properties properties)
 		{
-			super(crop, properties);
+			super(crop.orElseThrow(() -> new IllegalStateException("Shouldn't create crop stem before the crop is created!")), properties);
 		}
 		
 		@Nullable

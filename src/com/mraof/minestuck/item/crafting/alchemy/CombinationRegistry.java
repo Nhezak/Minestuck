@@ -116,9 +116,9 @@ public class CombinationRegistry {
 		}
 		
 		if(item.isEmpty())
-			if(input1.getItem().equals(MSBlocks.GENERIC_OBJECT.asItem()))
+			if(input1.getItem().equals(MSBlocks.GENERIC_OBJECT.get().asItem()))
 				return mode == Mode.MODE_AND ? input1 : input2;
-			else if(input2.getItem().equals(MSBlocks.GENERIC_OBJECT.asItem()))
+			else if(input2.getItem().equals(MSBlocks.GENERIC_OBJECT.get().asItem()))
 				return mode == Mode.MODE_AND ? input2 : input1;
 		return item;
 	}

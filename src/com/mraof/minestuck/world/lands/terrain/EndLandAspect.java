@@ -37,10 +37,10 @@ public class EndLandAspect extends TerrainLandAspect
 	@Override
 	public void registerBlocks(StructureBlockRegistry registry)
 	{
-		registry.setBlockState("surface", MSBlocks.END_GRASS.getDefaultState());
-		registry.setBlockState("upper", MSBlocks.COARSE_END_STONE.getDefaultState());
+		registry.setBlockState("surface", MSBlocks.END_GRASS.get().getDefaultState());
+		registry.setBlockState("upper", MSBlocks.COARSE_END_STONE.get().getDefaultState());
 		registry.setBlockState("ground", Blocks.END_STONE.getDefaultState());
-		registry.setBlockState("ocean", MSBlocks.ENDER.getDefaultState());
+		registry.setBlockState("ocean", MSBlocks.ENDER.get().getDefaultState());
 		registry.setBlockState("structure_primary", Blocks.END_STONE_BRICKS.getDefaultState());
 		registry.setBlockState("structure_primary_decorative", Blocks.PURPUR_PILLAR.getDefaultState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y));
 		registry.setBlockState("structure_primary_stairs", Blocks.PURPUR_STAIRS.getDefaultState());
@@ -48,7 +48,7 @@ public class EndLandAspect extends TerrainLandAspect
 		registry.setBlockState("structure_secondary_stairs", Blocks.STONE_BRICK_STAIRS.getDefaultState());
 		registry.setBlockState("structure_planks", Blocks.BRICKS.getDefaultState());
 		registry.setBlockState("structure_planks_slab", Blocks.BRICK_SLAB.getDefaultState());
-		registry.setBlockState("village_path", MSBlocks.COARSE_END_STONE.getDefaultState());
+		registry.setBlockState("village_path", MSBlocks.COARSE_END_STONE.get().getDefaultState());
 		registry.setBlockState("village_fence", Blocks.NETHER_BRICK_FENCE.getDefaultState());
 		registry.setBlockState("structure_wool_1", Blocks.GREEN_WOOL.getDefaultState());
 		registry.setBlockState("structure_wool_3", Blocks.PURPLE_WOOL.getDefaultState());
