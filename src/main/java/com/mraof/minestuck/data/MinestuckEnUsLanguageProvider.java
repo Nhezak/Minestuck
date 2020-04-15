@@ -482,6 +482,9 @@ public class MinestuckEnUsLanguageProvider extends MinestuckLanguageProvider
 		addStoreTooltip(MSItems.ROCK_COOKIE, "This here is a true wonder-cookie! Totally! And they are even cheaper than regular cookies!");
 		add(MSItems.WOODEN_CARROT, "Wooden Carrot");
 		addTooltip(MSItems.WOODEN_CARROT, "It's as edible as a plank.");
+		add(MSItems.PAPER_STICK, "Paper Stick");
+		addTooltip(MSItems.PAPER_STICK, "It scares you how consistent this stick is even though it's literally made out of paper.");
+		add(MSItems.LAMP_IN_A_ROD, "Lamp in a Rod");
 		add(MSItems.FUNGAL_SPORE, "Fungal Spore");
 		addTooltip(MSItems.FUNGAL_SPORE, "You must live off the land, and in this land, it means eating this.");
 		addStore(MSItems.FUNGAL_SPORE, "Mushroom Skittles");

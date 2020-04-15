@@ -1,0 +1,14 @@
+{
+    "parent": "item/handheld_rod",
+    "textures": {
+        "layer0": "minestuck:item/lamp_in_a_rod"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "cast": 1
+            },
+            "model": "minestuck:item/lamp_in_a_rod_casted"
+        }
+    ]
+}
